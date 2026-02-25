@@ -1,0 +1,6 @@
+interface:
+  display_name: "transfer_material"
+  short_description: "for my phd's stage transfer to generate latex code"
+
+policy:
+  allow_implicit_invocation: false
