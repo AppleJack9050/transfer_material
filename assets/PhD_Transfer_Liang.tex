@@ -1,0 +1,1195 @@
+%\documentclass[draft,british,a4paper,12pt]{phdthesis}
+\documentclass[final,british,a4paper,12pt]{phdthesis}
+% \usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+%below two lines to get continuous fig numbering without chapter/section numbers, just 1, 2, etc.
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\usepackage[font=footnotesize]{caption}
+\usepackage{fancyhdr,graphicx}
+\usepackage{bibentry}
+\usepackage{tabularx}
+\usepackage[british]{babel}
+% --- in preamble ---
+\usepackage{pgfgantt}
+\usepackage{array} % for >{\raggedright\arraybackslash}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+%\usepackage{cite}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage[latin1]{inputenc}
+% \usepackage[british]{babel}
+%\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{turnstile}
+
+%\usepackage{mathpple} % maths fonts for palatino
+\usepackage{newtxtext,newtxmath} % added by me for phi and psi
+
+\usepackage{latexsym}
+
+\usepackage[draft]{varioref}
+
+\usepackage[english,vario]{fancyref}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumerate}
+\usepackage{multicol}
+
+\usepackage{multirow}
+% \usepackage[]{natbib}
+\usepackage{array}
+\usepackage{subfig}
+\usepackage{wrapfig}
+
+%\usepackage{multibib}
+%\newcites{clus}{Cluster Papers}
+\nobibliography*
+
+\usepackage{rotating}
+% \usepackage{pifont} % postscript fonts for dinglist
+% \usepackage[index]{apacite}
+% \usepackage{program}
+% \usepackage{scalefnt}
+\usepackage{nicefrac}
+
+\usepackage[T1]{fontenc}
+\usepackage{uncial}
+\usepackage[nottoc,numbib]{tocbibind}
+
+%include subsubsections in toc
+		\setcounter{tocdepth}{2}
+
+% \tracingstats=2
+% This code (culled from google groups works around a problem with
+% fancyref being incompatible with the version of varioref installed
+% by debian/woody
+\makeatletter
+ \renewcommand*{\@fancyref@page@ref}{%
+  \let\vref@space\space
+  \@ifnextchar[%]
+  \@vpageref{\@vpageref[\unskip]}%
+}%
+\makeatother
+
+
+%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Texture analysis on computed tomography (CT) data from renal cell carcinoma cases}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% {toc,secnum}depth are set in texinput/phdthesis.cls
+\singlespacing
+\begin{document}
+\author{Yuan Liang  \\ Student Number: 16206518}
+\authoraddress{% 		
+     UCD School of Computer Science,\\
+     University College Dublin,\\
+     Belfield, Dublin 4, Ireland.\\
+}
+
+\date{\today}
+
+\submission{A Ph.D. Transfer Report submitted to \\University College Dublin for progression to Stage 2 in the \\College of Science
+\begin{center}
+\vspace*{10mm}
+\includegraphics[width=.24\textwidth]{pictures/UCD_logo.png}
+\end{center}
+}
+\supervision{Dr. Abraham G. Campbell; Dr. Sourav Bhattacharjee}
+\department{School of Computer Science \& School of Veterinary Medicine\\[2mm]}
+
+% \hod{Professor Neil Hurley, Ph.D.}
+
+\submissionmonth{PhD Started at October 1\textsuperscript{st}}
+\submissionyear{2023}
+\rspmonth{Last RSP Held at December 4\textsuperscript{th}}
+\rspyear{2025}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+\tableofcontents
+
+\listoffigures
+
+\begin{listofpublications}
+
+
+% \textbf{Conference Papers in review}\bigskip
+
+% \hspace*{5mm}\bibentry{Yuan1}\bigskip
+
+
+% \textbf{Journal Articles in review}\bigskip
+
+% \hspace*{5mm}\bibentry{Yuan}
+
+% \vspace{5mm}
+
+% \textbf{Conference Papers}\bigskip
+
+% \hspace*{5mm}\bibentry{Yuan2}
+
+% \vspace{2mm}
+
+% \hspace*{5mm}\bibentry{Yuan3}
+
+% \vspace{2mm}
+
+% \hspace*{5mm}\bibentry{Yuan4}
+
+% \vspace{2mm}
+
+% \hspace*{5mm}\bibentry{Yuan5}
+
+\textbf{Yuan Liang}, Abraham G. Campbell, and Sourav Bhattacharjee, \textit{"Renal cell carcinoma texture analysis with the KiTS23 dataset."} (under review) in the Advances in Urology, 2025.
+
+\vspace{10mm}
+% Comment from Abey this is accepted so should be changed  
+Fangyijie Wang, \textbf{Yuan Liang}, Sourav Bhattacharjee, Abey Campbell, Kathleen Curran, and Guenole Silvestre, \textit{"Fusing Radiomic Features with Deep Representations for Gestational Age Estimation in Fetal Ultrasound Images."} (Accepted) MICCAI: The 28th International Conference on Medical Image Computing and Computer Assisted Intervention, 2025.
+
+\vspace{10mm}
+
+\textbf{Yuan Liang}, Zixiang Xu, Sanaz Rasti, Soumyabrata Dev., and Abraham G. Campbell, \textit{"On the Use of a Semantic Segmentation Micro-Service in AR Devices for UI Placement."}  In The IEEE CTSoc International Conference on Games, Entertainment \& Media, 2022.
+
+\vspace{10mm}
+
+Xu, Zixiang, \textbf{Yuan Liang}, Abraham G. Campbell, and Soumyabrata Dev., \textit{"An Explore of Virtual Reality for Awareness of the Climate Change Crisis: A Simulation of Sea Level Rise."} In 2022 8th International Conference of the Immersive Learning Research Network (iLRN), pp. 1-5. IEEE, 2022.
+
+\vspace{10mm}
+
+Zheng, Mengya, Rosemary J. Thomas, Xingyu Pan, Zixiang Xu, and \textbf{Yuan Liang}, \textit{"Augmenting Feature Importance Analysis: How Color and Size Can Affect Context-Aware AR Explanation Visualizations?"} In 2022 IEEE International Symposium on Mixed and Augmented Reality, 2022.
+
+\vspace{10mm}
+
+Zixiang Xu, \textbf{Yuan Liang}, Abraham G. Campbell, and Soumyabrata Dev,  \textit{"Climate Crisis in Virtual Environments: Exploration and Evaluation of Virtual Reality and Mixed Reality for Climate Change Education in Sea Level Rise Simulation."} In 8th International Conference of the Immersive Learning Research Network (iLRN), 2022.
+
+\end{listofpublications}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+    \vspace*{-20mm}
+% \begin{abstract}
+% This report outlines the progress and future direction of a PhD research project focused on texture analysis of renal tumours through the integration of deep learning and radiomics. The central aim of the study is to investigate whether deep learning-based models can effectively perform texture analysis in medical imaging, with particular emphasis on renal tumour classification using CT imaging.
+
+% To establish a solid foundation for the research, an extensive literature review was conducted, covering not only applications of deep learning and radiomics in renal tumour analysis, but also broader developments in computer vision and feature fusion methodologies. As part of this review, a systematic evaluation was carried out to assess the current state of machine learning and deep learning models applied to renal tumour classification using CT images. While the findings confirm the feasibility of deep learning approaches, they also highlight two major limitations: first, the limited use of deep learning techniques in the current literature, and second, the substantial performance gap in classification accuracy and robustness that still exists in this domain. Moreover, very few studies have explored the integration of radiomics with deep learning in a systematic and quantitative manner.
+
+% To address these gaps, a feature fusion modelling framework was proposed that combines handcrafted radiomic features with computer vision-based deep learning representations. This approach was motivated by the potential of radiomics features to enhance model interpretability, helping to compensate for the inherent opacity of deep learning architectures. Moreover, existing literature suggests that such multimodal fusion can lead to superior performance compared to deep learning alone. The framework was initially validated on a 2D ultrasound-based gestational age estimation task, demonstrating technical feasibility and the potential for cross-modal integration. Building on this foundation, the approach will be extended to volumetric 3D CT images for renal tumour subtype and malignancy classification. Publicly available datasets, such as KiTS and TCGA-KIRC, will be used for model development and validation.
+
+% Planned future work includes a systematic comparison of different feature fusion strategies, quantitative benchmarking against both classical radiomics-based machine learning pipelines and unimodal deep learning models, and external validation on independent datasets. In addition, model explainability will be explored through feature attribution and visualisation techniques to improve interpretability and clinical transparency. This research aims to advance the methodological foundation of texture-based tumour classification and contribute to the broader field of non-invasive, AI-assisted cancer diagnosis.
+
+This report presents the progress, findings, and planned continuation of a PhD project investigating the integration of deep learning and radiomics for texture analysis of renal tumours using computed tomography. The overarching goal is to establish whether multimodal fusion can enhance both the diagnostic accuracy and interpretability in renal tumour classification.
+
+A comprehensive literature review and systematic analysis were conducted to evaluate existing approaches in CT-based renal tumour classification. The review revealed two major research gaps: (1) the limited use of DL for direct texture analysis of renal tumours, and (2) the lack of systematic investigations into the fusion of radiomic features with DL representations. To address these limitations, a novel feature fusion framework was developed that integrates handcrafted radiomic descriptors with high-level deep features, aiming to balance performance and transparency.
+
+This framework was first validated in a 2D ultrasound setting for gestational age estimation, confirming its technical feasibility and potential for generalisation across modalities. Building on this success, the approach will be extended to 3D CT data for renal tumour subtype and malignancy classification. Public datasets such as KiTS23 and TCGA–KIRC will serve as the primary data sources to ensure reproducibility and external validity.
+
+Future work will systematically compare different multimodal fusion strategies, including numerical, attention-based, and vision–language integrations, and incorporate metadata through both tabular encoders and natural-language representations. Benchmarking will be performed against radiomics-only and CT-only baselines. Interpretability studies will move beyond post hoc explanation tools, focusing instead on visualising the role of radiomic and metadata features in the decision process to provide clinically grounded transparency. The final phase will consolidate these contributions into a comprehensive doctoral thesis and a series of publications.
+
+\end{abstract}
+
+
+
+
+% \end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the following line is only necessary if you DO NOT include the list of publications environment
+\pagenumbering{arabic}
+
+\onehalfspacing
+%\doublespacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\parskip}{5pt}
+
+\chapter{Introduction}\label{chap:intro}
+    
+\section{Research Context}\label{sec:research_context}
+Kidney cancer accounted for approximately 431,288 new cases worldwide in 2020, ranking ninth in incidence among men and fourteenth among women~\cite{Statistics_cancer_2020,BUKAVINA2022529_2022_rcc}. Renal cell carcinoma (RCC) represents more than 90\% of these cases~\cite{Renal_cell_2017,RINI20091119_rcc_1,SANCHEZGASTALDO201777_rcc2,rcc_4}. Increased utilisation of sensitive imaging modalities such as CT and MRI has contributed to a higher detection rate and earlier diagnosis~\cite{rcc_CT,ct_2}.
+
+Traditional oncologic imaging relies heavily on subjective interpretation, whereas radiomics offers quantitative, reproducible descriptors that capture tumour heterogeneity and morphology~\cite{radiomicsIntro,radiomics1}. By transforming segmented regions into high-dimensional texture features~\cite{radiomics2,radiomics3}, radiomics supports machine learning (ML) and deep learning (DL) models for tasks including subtype classification, gene expression prediction, and prognostication~\cite{radiomics2,radiomics3,radiomics4,radiomics5}. DL can further perform texture analysis directly from images~\cite{radiomicsDL}, although its performance depends on segmentation quality~\cite{radiomics2,radiomics3}. As a result, radiomics has become an influential tool in non-invasive tumour characterisation~\cite{radiomics4}.
+
+ML and DL techniques continue to transform medical imaging by learning complex patterns with increasing accuracy and reduced manual intervention~\cite{radiomicsDL,DLradiology}. ML identifies discriminative relationships within data~\cite{ML,radiomics4}, while DL leverages hierarchical feature representations~\cite{DL}, often achieving superior performance~\cite{DL,DLradiology,radiomicsDL}. In RCC imaging, these methods have been applied to classification, segmentation, grading, and outcome prediction~\cite{DLradiology,radiomicsDL,radiomics2,radiomics3,radiomics4,radiomics5}. However, DL-based texture analysis of renal tumours remains limited, with most studies relying on handcrafted radiomics or using DL primarily for segmentation~\cite{litjens2017survey}. Direct comparisons between radiomics-based ML pipelines and DL models are scarce, and multimodal frameworks combining handcrafted and learned representations remain underexplored.
+
+Radiomics features provide interpretable descriptors of tumour appearance~\cite{radiomics2,radiomics3}, whereas DL features are powerful but less transparent~\cite{DL,DLradiology,radiomicsDL}. Their complementary nature suggests that combining both modalities may yield synergistic benefits~\cite{huang2020fusion,stahlschmidt2022,sharma2021medfusenet}. Existing fusion strategies—including early concatenation, attention mechanisms, and multi-branch networks—indicate potential improvements in accuracy and interpretability~\cite{huang2020fusion}. Yet, systematic evaluation of these methods in 3D CT-based renal tumour analysis is limited.
+
+This project investigates multiple fusion approaches for 3D CT classification, assessing accuracy, robustness, and interpretability. Beyond numeric fusion, an emerging direction is to leverage vision–language models (VLMs) by converting radiomics features into natural-language descriptions. VLMs integrate image and text information~\cite{Wu2025,Akinci2025}, and textual prompting has been shown to enhance model performance in related imaging tasks~\cite{Avci2025}. In this work, radiomics values and relevant clinical information are translated into descriptive textual prompts and supplied to a pretrained VLM alongside CT volumes, enabling richer cross-modal representation learning.
+
+Recent evidence demonstrates that incorporating textual descriptions of imaging features improves performance and generalisability, as shown by Ra~\textit{et~al.} for breast tumour classification using an LLM-enhanced radiomics pipeline~\cite{Ra2025}. Building on this concept, the proposed framework unifies 3D imaging and radiomic information within a VLM for renal tumour classification. This study evaluates the advantages of such textual fusion relative to conventional numeric fusion, focusing on predictive accuracy, robustness, and interpretability, with clinician assessment of textual outputs.
+
+The framework further extends to incorporate clinical metadata, which can also be expressed as structured text. Integrating imaging, radiomics, and metadata within a multimodal VLM is expected to enhance diagnostic performance while offering improved transparency in decision-making.
+
+
+\section{Research Objectives}\label{sec:research_objectives}
+
+This thesis aims to advance the integration of DL and radiomics for texture analysis in medical imaging, with a focus on 3D CT-based renal tumour classification. Renal tumours were selected not only due to the limited adoption of DL in this domain but also because current classification algorithms exhibit a notable performance gap.
+
+Although renal tumours represent a smaller share of global cancer incidence than lung or breast malignancies, they remain clinically important owing to their often asymptomatic presentation and the lack of reliable imaging biomarkers. They also pose inherent imaging challenges, including subtle inter-class differences, anatomical variability, and marked label imbalance across subtypes~\cite{khan2025}. The biological heterogeneity of RCC further provides an opportunity to design models that capture fine-grained visual and radiomic variations~\cite{bang2025,uhlig2024}. However, the scarcity of large, standardised datasets has limited the development of generalisable benchmarks, contributing to the relatively small body of kidney tumour research in medical imaging~\cite{sheikhy2025}. At the same time, this gap highlights a timely research opportunity. With increasingly curated CT datasets and progress in multimodal learning, renal tumour analysis stands to benefit from frameworks that combine radiomic, metadata, and imaging information to improve diagnostic accuracy and interpretability.
+
+Accordingly, renal tumour classification offers both a clinically meaningful context and a technically demanding environment for evaluating advanced fusion approaches. This work addresses key gaps by systematically assessing the performance, robustness, and interpretability of multiple modelling strategies and feature-fusion paradigms.
+
+
+
+
+
+The specific objectives of this research are as follows:
+
+
+\begin{enumerate}
+\item To identify, process, and curate suitable publicly available CT renal tumour datasets (e.g., KiTS\footnote{\href{https://kits-challenge.org/kits23/}{https://kits-challenge.org/kits23/}}, TCGA\footnote{\href{https://www.cancer.gov/ccg/research/genome-sequencing/tcga}{https://www.cancer.gov/ccg/research/genome-sequencing/tcga}}) for model training, validation, and benchmarking, ensuring reproducibility and external generalisation.
+
+
+\item To extract and interpret handcrafted radiomics features from the curated datasets, and to conduct texture-based classification using conventional ML methods as a baseline reference for subsequent benchmarking.
+
+\item To quantitatively evaluate the performance gain of DL models over traditional radiomics-based ML approaches in texture analysis, identifying strengths and limitations across architectures and feature types.
+
+\item To develop and systematically compare advanced feature-fusion frameworks that integrate radiomics and imaging representations, investigating strategies such as early, late, and attention-based fusion, and designing appropriate loss functions to enhance texture discrimination and model stability.
+
+\item To explore VLM-based fusion as an advanced multimodal learning approach, converting radiomic features into natural language descriptions and aligning them with imaging data through pretrained VLMs. This objective aims to leverage the semantic reasoning capabilities of VLMs for improved interpretability and cross-modal representation learning.
+
+\item To extend the radiomics framework into a multimodal paradigm by incorporating additional information such as patient metadata or clinical descriptors, enabling richer contextual learning and improving generalisability in renal tumour classification.
+
+\item To validate the interpretability and clinical relevance of the proposed models through expert evaluation, assessing whether the model’s feature attributions and generated textual explanations align with radiological reasoning and clinical decision-making.
+
+\end{enumerate}
+
+
+\section{Research Questions}\label{rq}
+At the outset of this project, the research was broadly framed around texture analysis of renal tumours, with an initial plan to develop a multimodal segmentation model integrating DL and radiomics features, followed by 3D visualisation to support clinical interpretation of tumour morphology. 
+
+However, insights gained during the literature review prompted a critical refinement of this direction. Radiomics features have historically been used for classification and prediction tasks—such as subtype identification, grading, and prognostic modelling—rather than for segmentation~\cite{radiomicsIntro,radiomics1,radiomics2,radiomics3}. A clear mismatch emerged between the nature of radiomics and the objectives of segmentation, which, while essential as a pre-processing step for region-of-interest extraction, is not itself a radiomics-driven task~\cite{kits}. Moreover, DL has already become the dominant approach for medical image segmentation, leaving limited scope for methodological novelty in this area~\cite{kits, litjens2017survey}. In contrast, the use of DL for radiomics-style texture analysis, including renal tumour classification and outcome prediction, remains relatively underexplored, revealing a promising research gap.
+
+Consequently, the project focus shifted towards investigating DL-based texture analysis for renal tumour CT imaging, with an emphasis on assessing its feasibility and performance relative to traditional radiomics-based ML approaches. This adjustment better aligns with the strengths of radiomics and targets an area with substantial potential for advancement.
+
+This refinement also highlighted opportunities for multimodal feature fusion, enabling the combination of handcrafted radiomic descriptors with learned DL representations. Such fusion strategies, rather than treating the modalities as competing, allow models to capture both abstract features and clinically interpretable quantitative information~\cite{huang2020fusion}. Beyond improving classification accuracy, this integration supports model transparency, which is vital for clinical acceptance and decision support in renal tumour analysis.
+
+Overall, these developments reflect an iterative, evidence-driven redefinition of the research strategy, grounded in methodological alignment and clinical relevance. Guided by the research gaps identified, this thesis aims to address the following research questions:
+
+        
+        
+\begin{itemize}
+
+    \item \textbf{RQ1:} How can radiomics and DL representations be effectively integrated to improve texture-based classification performance across medical imaging modalities?
+
+    \item \textbf{RQ2:} What are the most effective feature-fusion strategies, including conventional numerical fusion and advanced VLM-based approaches, for aligning radiomic features with imaging representations?
+
+    \item \textbf{RQ3:} To what extent can the proposed multimodal frameworks, incorporating radiomics, imaging, and metadata, enhance accuracy, robustness, and interpretability in 3D CT-based renal tumour classification?
+
+    \item \textbf{RQ4:} How well do the interpretive mechanisms and textual outputs of the proposed models align with radiological reasoning, and how can expert evaluation be used to validate their clinical interpretability?
+
+\end{itemize}
+
+
+
+
+\section{Report Overview}
+In the next chapter (Chapter~\ref{chap:survey}), a comprehensive literature review will be conducted. This will include a systematic review of the current state of the art in applying DL and ML to CT-based texture analysis of renal tumours, an introduction to CT-based radiomics using the PyRadiomics toolkit, a targeted review of relevant computer vision techniques in medical imaging, and a focused discussion on multimodal feature fusion strategies for integrating radiomic features, clinical data, and DL features, including VLMs. As part of the systematic review, publicly available datasets relevant to renal tumour analysis will be summarised and evaluated, and the rationale for selecting specific datasets as training data and external validation in this study will be clearly articulated. These reviews will collectively identify key research gaps and provide the foundation for the research questions and contributions addressed in this thesis. 
+        
+Chapter~\ref{chap:field} introduces the specific problem domains corresponding to the research questions and outlines the methodological approaches adopted to address these challenges. This chapter also provides a summary of the research progress achieved thus far. To date, three key milestones have been reached. 
+
+\textbf{First}, a comprehensive understanding of radiomics feature extraction has been developed, and conventional ML techniques have been applied to perform texture-based classification on the KiTS23 dataset. The outcomes from this traditional pipeline serve as a benchmark for evaluating the performance of subsequent DL-based approaches. \textbf{Second}, initial experiments have been conducted using state-of-the-art feature fusion strategies on lightweight 2D medical imaging datasets. These experiments provided a preliminary assessment of the feasibility and advantages of integrating handcrafted radiomics features into DL architectures, laying the foundation for more complex multimodal investigations. \textbf{Third}, the feature-fusion strategies developed and evaluated in Task~2, together with other state-of-the-art fusion techniques, have been adapted and applied to the 3D CT-based KiTS23 dataset. At this stage, DL and fusion-based architectures were implemented and compared against the Task~1 baseline of traditional radiomics combined with ML. The experiments aim to evaluate how transferring, adapting, and extending these fusion strategies influence classification accuracy, robustness, and interpretability in renal tumour analysis. The findings from this stage provide critical insights for refining multimodal fusion pipelines and informing the subsequent development of VLM-based models.
+
+
+
+A detailed research plan, including the proposed workflow and timeline, is presented in Chapter~\ref{chap:progress}.
+
+
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Literature Review}\label{chap:survey}
+% What are the most important authors, findings, concepts, schools, debates and hypotheses?
+% What gaps exist in the literature?
+% Are these gaps methodological, conceptual or epistemological?
+% How does your thesis fill these gaps? 
+
+
+\section{Systematic Review - Deep Learning and Radiomics in Renal Tumour Classification}
+\textbf{This systematic review is currently being prepared for submission to a peer-reviewed journal.}
+
+\vspace{2mm}
+
+Before presenting the findings of the systematic review, it is important to outline its position within the context of this research project. This review was conceived as an initial step to critically assess the current landscape of ML and DL applications in renal tumour texture analysis before answering the research questions. Tumour classification tasks, such as distinguishing between benign and malignant renal tumours, or subtyping RCC, serve as a relevant and clinically meaningful entry point for evaluating the potential of DL-based texture analysis.
+
+
+The review aimed to determine how DL compares with traditional radiomics-based ML methods in terms of diagnostic performance, methodological consistency, and data requirements. Classification was chosen for its direct clinical relevance and reliance on texture information, making it an appropriate test case for assessing DL feasibility. The findings showed that radiomics combined with ML remains the dominant paradigm, while evidence for DL is present but limited. This confirmed that DL is feasible for texture analysis but highlighted a clear research gap: DL is not yet widely applied to renal tumour classification, and few studies directly compare DL with radiomics-based ML pipelines. The review also exposed substantial methodological heterogeneity across studies, including variations in CT acquisition phases, feature extraction procedures, model architectures, and evaluation strategies. Such inconsistencies emphasise the need for more rigorous and standardised methodologies. Notably, the absence of studies combining radiomics features with DL representations underscores the potential value of multimodal fusion, motivating a shift in research focus towards unified fusion frameworks.
+
+% In summary, the systematic review addressed the first research question concerning the feasibility of DL for texture-based classification and provided the foundation for subsequent questions. These include how DL and ML compare under controlled conditions and whether multimodal integration of radiomics and DL can offer superior performance. The insights gained directly informed the experimental design adopted in the remainder of this thesis.
+
+        
+% \subsection{Protocols}
+% This review follows the Preferred Reporting Items of the Guidelines for Systematic Reviews (PRISMA)~\cite{prisma}.  The study selection criteria and data extraction strategy were determined before study initiation.
+        
+% \subsection{Study Selection}
+% Two reviewers determine the eligibility of titles and abstracts of studies retrieved. All conflicts will be resolved through group discussion with a third reviewer. All records identified for full-text screening will be screened by the principal researcher to identify records for inclusion in the review.
+
+
+% \subsection{Eligibility Criteria}
+% All single studies, comparative studies and original studies on humans, which met the following PICO criteria, were included:
+
+% P (Population): Patients diagnosed with renal tumours.
+
+% I (Intervention): Utilisation of Radiomics or texture analysis techniques, employing either ML or DL algorithms.
+
+% C (Comparison): Comparisons made between Radiomics techniques facilitated by ML and those facilitated by DL.
+
+% O (Outcome): Outcomes assessed include the accuracy, sensitivity, specificity, and area under the ROC curve (AUC) of renal cancer diagnoses;  and the long-term prognosis of patients, influenced by tumour characteristics analysed through ML and DL techniques.
+
+
+
+
+
+\subsection{Results}\label{subsec:result}
+            
+\begin{figure}[ht]
+ \centering
+ \makebox[\textwidth][c]{\includegraphics[width=0.75\textwidth]{pictures/flow.png}}%
+ \caption{PRISMA Flow-chart of included studies. There are 24 studies included.}
+ \label{fig-1}
+\end{figure}
+            
+A total of $274$ records were identified through database searches ($250$ English-language and $24$ Chinese-language articles). Chinese publications were included to ensure comprehensive coverage of rapidly expanding radiomics and DL research from China, with screening supported by a Chinese-speaking author. After removing duplicates, $180$ records remained; title and abstract screening excluded $100$, leaving $80$ for full-text review. Following application of all eligibility criteria, $24$ studies were included. These focused specifically on CT-based radiomics or DL methods for renal tumour classification and reported relevant performance metrics. The selection process is summarised in Figure~\ref{fig-1}.
+
+\subsection{Private vs Public Datasets}
+
+Most studies (79\%) relied exclusively on internal institutional datasets. While such datasets benefit from consistent imaging protocols and expert annotation, they limit generalisability and reproducibility. Public datasets are therefore essential for benchmarking and external validation. However, heterogeneity in annotation standards, imaging phases, and data quality persists even within public resources, underscoring the need for larger, well-curated repositories with consistent metadata.
+
+\subsection{Public Data Source}\label{Sec:dataset}
+
+Nineteen studies used internal datasets, whereas only five incorporated public datasets. The primary public resources were:
+\begin{itemize}
+    \item The Cancer Genome Atlas (TCGA),
+    \item The Cancer Imaging Archive (TCIA)\footnote{\href{https://www.cancerimagingarchive.net/}{https://www.cancerimagingarchive.net/}}, and
+    \item The Kidney Tumor Segmentation Challenge (KiTS) datasets.
+\end{itemize}
+
+TCGA provides multi-omics profiles and extensive clinical information across numerous tumour types~\cite{weinstein2013cancer}, but no imaging data. TCIA complements TCGA by offering de-identified CT, MRI, and PET imaging~\cite{clark2013cancer}, including collections that bridge imaging and genomics (e.g., TCGA-KIRC). CT enhancement phase labels, however, are inconsistent and often require manual inspection of DICOM metadata. Limited clinical metadata is available for some collections.
+
+KiTS19, KiTS21, and KiTS23 focus on kidney cancer segmentation~\cite{kitsIntro}. KiTS23 provides increased diversity by including both corticomedullary and nephrogenic phase CT scans. All KiTS datasets supply high-quality 3D segmentations and basic clinical variables (e.g., age, sex, laterality, subtype), though not molecular data. Despite containing around $500$ cases, KiTS23 is considered large by medical imaging standards, where expert annotation is costly. Previous work has shown that state-of-the-art models such as nnU-Net, TransUNet, and SwinUNETR achieve strong generalisation using only a few hundred cases~\cite{isensee2021nnu}.
+
+KiTS23 also offers rich multimodal information: voxel-level annotations, radiomics-feasible segmentations, clinical metadata, and extractable deep feature representations. Each CT volume can be decomposed into numerous overlapping 3D patches~\cite{wolf2023self}, effectively expanding the training set. Transfer learning and self-supervised pretraining further mitigate dataset size limitations, with studies demonstrating performance gains over training from scratch~\cite{tajbakhsh2016convolutional,kim2022transfer,wolf2023self,azizi2023robust}. Extensive augmentation strategies (rotations, flips, intensity perturbation) provide additional regularisation, and ImageNet-pretrained models have been shown to perform robustly even on datasets of this scale~\cite{maccin2025kidneynext}. Collectively, these factors support the suitability of KiTS23 for reliable DL classification research.
+
+Additionally, portions of the TCGA imaging data within TCIA have been annotated as part of the AIAM initiative, where AI-generated segmentations were reviewed by expert radiologists~\cite{van2023image}. These standardised and quality-controlled annotations enhance the utility of TCIA for external validation. Consequently, TCIA datasets provide a strong foundation for testing the robustness and generalisability of models trained on KiTS23 across diverse real-world imaging conditions.
+
+
+
+
+
+
+
+% \subsection{CT Phases Used}
+
+% Renal tumour CT imaging may be acquired across several contrast-enhanced phases, each emphasising different anatomical or functional features. The principal phases include the unenhanced (UEP/NCP) phase, which is useful for identifying fat and calcification; the corticomedullary phase (CMP), obtained 25–40 seconds post-contrast and providing maximal cortical and vascular enhancement; the nephrographic phase (NP/PP), acquired at 80–100 seconds and offering homogeneous parenchymal enhancement ideal for tumour delineation; the excretory phase (EP), performed at 3–5 minutes to visualise the collecting system; and the venous phase, often considered a late nephrographic or early excretory acquisition. Some studies used full multiphasic protocols, such as the ALL-P sequence combining NCP, CMP, NP, and EP.
+
+% Phase utilisation varied across the 24 included radiomics studies. CMP was the most common, appearing in 11 studies~\cite{CMP,CMP1}, followed by NP in 9 studies~\cite{NP,NP1}. Venous-phase imaging was used in 4 studies, UEP in 2 studies, and at least 6 studies employed multi-phase combinations such as UEP + CMP + NP or ALL-P. One study used a late delayed phase, and one did not report phase information.
+
+% Overall, CMP and NP dominated due to their diagnostic value: CMP provides strong vascular and cortical contrast, whereas NP offers stable parenchymal enhancement suitable for radiomics feature extraction~\cite{phase}. However, the heterogeneity of phase selection across studies limits cross-study comparability and highlights the need for standardised imaging protocols.
+
+
+% \subsection{Algorithm Selection and Model Complexity}
+
+% Most studies used traditional ML models—SVM, random forests, gradient boosting—paired with handcrafted radiomics features. These models remain popular because they perform reliably on small datasets and offer some interpretability. DL, in contrast, was used in only one study (ResNet-50 + ELM)~\cite{chen2023ct}, reflecting the data-intensive nature of DL and the scarcity of large labelled datasets.
+
+% Despite this limited adoption, DL remains a promising avenue owing to its capacity to learn hierarchical texture representations directly from raw images. With increasing dataset availability and improvements in pre-training and domain adaptation, DL models are likely to surpass traditional radiomics pipelines. Hybrid approaches combining DL features with radiomics or clinical variables represent a natural direction for improving both accuracy and interpretability.
+
+\subsection{Tumour Subtype Classification Performance}
+
+Four clinically relevant tasks were identified across the included studies: (1) benign vs.\ malignant discrimination; (2) RCC subtype classification; (3) AML vs.\ RCC differentiation; and (4) oncocytoma vs.\ chromophobe RCC classification. A quantitative performance summary is provided in Table~\ref{tab:task_performance_final}. While moderate to high accuracy was reported in some settings, performance remains insufficient for routine clinical use, highlighting the potential for DL methods to improve robustness and subtype-specific discrimination.
+
+
+\begin{table}[ht]
+\centering
+\caption{Summary of Model Performance by Classification Task}
+\small
+\begin{tabular}{lccccc}
+\hline
+\textsf{Classification Task} & \textsf{N Studies} & \textsf{Mean AUC} & \textsf{Std Dev} & \textsf{Min AUC} & \textsf{Max AUC} \\
+\hline
+Benign vs Malignant             & 10 & 0.809 & 0.076 & 0.715 & 0.960 \\
+RCC Subtype Classification      & 6  & 0.814 & 0.068 & 0.720 & 0.910 \\
+AML (wvf/fp) vs RCC             & 4  & 0.871 & 0.066 & 0.810 & 0.955 \\
+Oncocytoma vs Chromophobe RCC  & 2  & 0.847 & 0.193 & 0.710 & 0.983 \\
+\hline
+\end{tabular}
+\label{tab:task_performance_final}
+\end{table}
+\subsection{Systematic Review Conclusion}
+Radiomics and ML approaches hold considerable promise for enhancing the non-invasive characterisation of renal tumours using CT imaging. This systematic review highlights a growing body of evidence supporting the feasibility of classifying tumour subtypes and distinguishing benign from malignant lesions with high diagnostic performance. Despite this progress, the field remains methodologically heterogeneous, with variation in classification tasks, feature selection techniques, imaging phases, and evaluation standards. Most studies employed traditional ML algorithms and handcrafted radiomics features, with limited adoption of DL. Corticomedullary and nephrographic phases were most commonly used, reflecting their diagnostic relevance and radiological contrast advantages.
+
+Although several high-quality, large-scale public datasets such as KiTS, TCGA, and TCIA are available, featuring well-annotated, multi-phase CT scans ideal for radiomics research, relatively few studies have utilised them. This underuse limits the reproducibility and generalisability of current findings and slows the pace of clinical translation.
+
+Future research should prioritise the use of larger, multi-institutional public datasets, standardised radiomics pipelines, and increased adoption of DL methods. With greater methodological rigour and data transparency, radiomics has the potential to become an integral component of renal tumour diagnosis and personalised management.
+
+\section{CT-Based Radiomics Using PyRadiomics}
+
+Radiomics enables the extraction of high-throughput quantitative features from medical images, converting them into structured variables for statistical or ML analysis. In renal tumour CT imaging, radiomics provides a non-invasive means of assessing tumour heterogeneity, intensity patterns, and morphology. Among existing radiomics tools, \textit{PyRadiomics} is widely used due to its standardisation, flexibility, and integration with Python~\cite{Griethuysen:2017}.
+
+A typical workflow begins with acquisition of contrast-enhanced CT—most often in the corticomedullary or nephrographic phase—followed by pre-processing steps such as voxel resampling, intensity discretisation, and optional denoising. Segmentation then defines the region of interest, performed manually, semi-automatically, or using DL. PyRadiomics requires spatially aligned image–mask pairs in standard formats (e.g.\ NIfTI, DICOM).
+
+From the segmented ROI, PyRadiomics extracts first-order statistics, shape descriptors, and texture features derived from matrices such as GLCM, GLRLM, GLSZM, NGTDM, and GLDM. Additional filtered features (e.g.\ wavelet, LoG) enable multi-scale texture analysis. Because this process can generate several hundred features per case, feature selection is essential. Common methods include variance and correlation filtering, RFE, LASSO, and mutual-information-based selection~\cite{VS, RFE}. Standardisation (e.g.\ z-scoring) is typically required before modelling.
+
+Selected features are used to train ML classifiers such as SVM, random forests, logistic regression, or gradient boosting, with performance evaluated via accuracy, AUC, sensitivity, and specificity under cross-validation. PyRadiomics adheres to IBSI guidelines, facilitating reproducibility, and integrates seamlessly with Python ML libraries such as \texttt{scikit-learn}.
+
+Despite these advantages, radiomics is sensitive to segmentation variability, acquisition differences, and feature instability. These limitations highlight the need for standardised imaging protocols, robust validation, and feature stability assessment.
+
+% \section{Computer Vision}\label{sec:CVDef}
+
+% Computer Vision (CV) aims to enable computers to extract high-level understanding from visual data~\cite{cs231n,CVDefine,CVDefine1,CVDefine2}. Supported by modern computing power and large datasets, CV systems can process substantially more visual information than the human eye and achieve accuracy that often surpasses human performance for specific tasks. CV relies heavily on ML and DL, with convolutional neural networks (CNNs) forming the basis for learning pixel-level image representations~\cite{DiseasePre}. CNNs progressively extract edges, textures, and higher-level shapes~\cite{CVBook3,CVBook4}, while recurrent architectures extend this capability to sequential video frames.
+
+% The main challenges in CV include feature extraction and handling the high dimensionality of image data~\cite{CVBook1,CVBook2}. CNNs address these by capturing hierarchical patterns and reducing computational complexity, enabling robust performance across varied imaging conditions.
+
+% \subsection{Applications of Computer Vision in Medical Imaging}
+
+% CV plays a central role in modern medical image analysis across CT, MRI, ultrasound, and pathology. A major application is segmentation, where DL models such as U-Net and its variants~\cite{CVBook2,CVBook4,huang2020fusion} delineate organs and tumours with high accuracy. CV also supports image classification tasks, including benign–malignant differentiation and tumour subtyping~\cite{radiomics2,radiomics3,radiomics4,radiomics5,radiomicsDL}. These capabilities are increasingly important for efficient workflows and personalised diagnosis.
+
+% Traditional radiomics relies on handcrafted texture, shape, and intensity features, which offer interpretability but depend heavily on preprocessing, segmentation quality, and robust feature extraction~\cite{lambin2012radiomics, Aerts:2014,zwanenburg2020reliability}. High-dimensional radiomics data often require feature selection to avoid overfitting~\cite{parmar2015machine}. By contrast, DL-based CV models automatically learn hierarchical feature representations from raw images, capturing subtle patterns and contextual cues~\cite{shen2017deep,litjens2017survey}. However, radiomics retains advantages in transparency and alignment with clinical reasoning.
+
+% Recent work increasingly explores hybrid approaches that fuse radiomics and DL-derived features~\cite{yang2025revit}. These multimodal models aim to combine interpretability with predictive power, improving diagnostic accuracy and supporting explainability in clinical settings.
+
+% In cancer imaging, AI models are typically organ- or task-specific rather than universal. This reflects both biological heterogeneity and the computational challenges associated with modelling diverse anatomical contexts. Tumours vary widely across organs in histopathology and appearance, and imaging modalities encode different physical properties~\cite{bian2025artificial,ma2024segment}. Domain shifts arising from differences in scanners, acquisition protocols, or anatomy can degrade performance when models are applied outside their training domain~\cite{guan2021domain,koh2022artificial}.
+
+% Most public datasets are organ-specific and lack cross-organ annotation~\cite{bian2025artificial,wei2025multicenter,ali2021state}, limiting the feasibility of universal detection models. The prevailing consensus is that medical AI systems should maintain domain specificity to ensure accuracy and robust generalisation~\cite{bian2025artificial,ma2024segment}. Modular architectures trained per organ or modality exploit anatomical priors and reduce inter-class variability~\cite{wei2025multicenter,guan2021domain}, whereas multitask learning may suffer from task interference due to competing optimisation objectives.
+
+% Clinical integration further demands interpretability. Organ-specific models tend to produce outputs aligned with clinicians’ diagnostic reasoning, while general-purpose systems may generate opaque or inconsistent decisions~\cite{ma2024segment,koh2022artificial,zhang2024challenges}. This remains a key barrier to the adoption of large-scale foundation models in oncologic imaging.
+\section{Computer Vision in Medical Imaging}
+In cancer imaging, AI models are generally organ- or task-specific rather than universal, reflecting both tumour heterogeneity and the difficulty of modelling diverse anatomical contexts. Variations in histopathology, imaging appearance, and modality physics, together with domain shifts from scanners or acquisition protocols, hinder cross-domain deployment~\cite{bian2025artificial,ma2024segment,guan2021domain,koh2022artificial}. Public datasets are likewise organ-bound and rarely include cross-organ labels, constraining efforts toward universal detectors~\cite{wei2025multicenter,ali2021state}. Consequently, domain-specific systems remain standard, as they leverage anatomical priors and avoid the optimisation conflicts seen in multitask models~\cite{bian2025artificial,guan2021domain}. Clinical adoption also favours such models because their outputs align more closely with established diagnostic reasoning, whereas general-purpose systems often lack interpretability~\cite{ma2024segment,zhang2024challenges}.
+
+
+
+\section{Fusion Strategies for Multimodal Data in Medical Imaging}
+
+Multimodal DL integrates imaging, clinical, pathological, and genomic information to improve diagnostic and prognostic performance~\cite{huang2020fusion,mohsen2022artificial}. Reviews consistently show that combining modalities yields measurable gains: Kline \textit{et al.} reported a 6.4% accuracy increase with multimodal fusion~\cite{kline2022multimodal}, and Mohsen \textit{et al.} found early-fusion models outperform image-only or clinical-only baselines in 13 of 14 studies~\cite{mohsen2022artificial}. Similar benefits have been demonstrated across oncology, neurology, systemic disease, and treatment-response prediction~\cite{mohsen2022artificial,Vanguri2022,acosta2022multimodal}.
+
+Recent surveys highlight rapid expansion of this field: Sun \textit{et al.} identified 77 multimodal DL studies using combinations of radiology, text, and clinical variables~\cite{sun2023scoping}, while Haq \textit{et al.} reported a sixteen-fold rise in multimodal radiology publications since 2019~\cite{haq2025mmml}. New reviews outline methodological trends—including integration with pathology and omics~\cite{Tariq2025,li2024review,simon2025multimodal}—and show that multimodal AI is moving toward clinically aligned systems~\cite{huang2020fusion,kline2022multimodal}. This thesis focuses on DL-based fusion strategies for recognition and classification tasks, covering early, intermediate, and late fusion~\cite{mohsen2022artificial,stahlschmidt2022}, along with VLM-based approaches and loss-function considerations~\cite{huang2020fusion,kline2022multimodal,li2024review}.
+
+\subsection{Early, Intermediate and Late Fusion}
+
+\textbf{Early fusion.} Early fusion concatenates raw or embedded features from multiple modalities into a unified representation~\cite{stahlschmidt2022,mohsen2022artificial}. Radiomics–clinical concatenation dominated early multimodal imaging research~\cite{mohsen2022artificial}, and several studies demonstrated clear improvements over unimodal models~\cite{huang2020fusion,kharazmi2018feature,yap2018multimodal}. Despite challenges such as modality imbalance~\cite{mohsen2022artificial}, early fusion remains widely used for tumour detection and risk prediction~\cite{yala2019deep,sun2025deep,xiao2025novel,hsu2021deep}.
+
+\textbf{Intermediate fusion.} Intermediate (joint) fusion merges modality-specific subnetworks at a mid-level layer, enabling shared representation learning~\cite{mohsen2022artificial}. Examples include MRI–text fusion for tumour classification~\cite{he2021deep} and CT–clinical fusion for embolism severity prediction~\cite{grant2021deep}. Attention and probabilistic mechanisms are common~\cite{samak2020prediction,liu2022machine,kawahara2018seven}. Transformer-based multimodal models such as IRENE and cross-attention frameworks further enhance performance~\cite{khader2023multimodal,zhou2023transformer,khader2023medical}. GNN-based fusion has also emerged for integrating anatomical or genomic graphs with imaging~\cite{simon2025multimodal}. Intermediate fusion often outperforms both early fusion and unimodal models~\cite{mohsen2022artificial}.
+
+\textbf{Late fusion.} Late fusion ensembles independently trained unimodal models~\cite{mohsen2022artificial}. Although it does not explicitly model cross-modal interactions, it is effective when modalities are asynchronous or incomplete. Demonstrated successes include Alzheimer’s diagnosis~\cite{qiu2018fusion}, outcome prediction with image+EHR ensembles~\cite{huang2020multimodal}, and stacked ultrasound–mammography–MRI classifiers~\cite{lu2024deep}. Hybrid late-fusion schemes can improve robustness under missing data~\cite{xiao2025novel}. It remains a transparent baseline for comparing integrated fusion strategies~\cite{mohsen2022artificial,huang2020multimodal}.
+
+\subsection{VLMs and Advanced Multimodal Fusion Approaches} \label{sec:VLM}
+
+Recent advances in multimodal learning have been driven by VLMs and related foundation models that jointly embed images and text via large-scale self-supervised pretraining~\cite{ryu2025vlmreview}. Inspired by CLIP~\cite{radford2021learning}, medical VLMs such as BioViL~\cite{boecking2022biovil,lyu2024language}, GLoRIA~\cite{huang2021gloria}, MedCLIP~\cite{park2020contrastive,wang2022medclip}, and BioMedCLIP~\cite{zhang2023biomedclip} align chest X-rays or other medical images with associated reports, enabling zero-shot classification and image–text retrieval. Earlier multimodal networks like TieNet had already demonstrated that incorporating clinical text improved chest X-ray classification by 5–6\% AUC~\cite{wang2018tienet}. Surveys now catalogue over 60 medical foundation models across radiology, pathology, and ophthalmology~\cite{ryu2025vlmreview}, including encoder–decoder systems for report generation and visual question answering~\cite{hartsock2024vlmreport,thawkar2023xraygpt}.
+
+A growing line of work “textualises” structured or numeric data for VLM input. AutoRad-Lung converts radiomics features into descriptive prompts for lung CT malignancy prediction~\cite{khademi2025autorad}, and FM-Bridge encodes imaging and risk variables as natural-language statements to improve liver tumour diagnosis~\cite{huang2025fmbridge}. Prompt-based methods similarly adapt general VLMs to domain-specific tasks, as in dental X-ray analysis~\cite{du2024prompting}. In pathology, MIL frameworks such as MI-Zero and ViLA-MIL use CLIP-based embeddings to align gigapixel slide patches with histological text, enabling zero-shot cancer subtype classification~\cite{lu2023mizero,shi2024vila}.
+
+Key challenges for medical VLMs include limited domain data, specialised terminology, and factual reliability~\cite{ryu2025vlmreview}. Proposed solutions span domain vocabularies, better region–word alignment, and expert feedback. MedVLM-R1 uses RLHF to refine reasoning~\cite{pan2025medvlm}, and SERPENT-VLM incorporates factuality checking to reduce hallucinations~\cite{kapadnis2024serpent}. Large annotated datasets such as MIMIC-CXR and ROCO support ongoing training and transfer~\cite{huang2020fusion,haq2025mmml}. Emerging MLLMs extend these capabilities to interactive, image–text understanding, and compact variants (e.g.\ Small-MM) show that clinically deployable models need not be excessively large~\cite{nam2025multimodal,zambrano2025smallmm}. Overall, VLM-based approaches point toward holistic, patient-centred models that integrate visual, textual, and molecular information~\cite{haq2025mmml,zhoudeep}.
+
+Loss design in multimodal DL balances task performance with cross-modal alignment. Most models still rely on standard supervised objectives—cross-entropy for classification, Dice or pixel-wise cross-entropy for segmentation, and MSE for regression~\cite{mohsen2022artificial}. Class imbalance is commonly addressed with weighting or focal loss~\cite{kline2022multimodal,haq2025mmml}, multi-label problems with sigmoid cross-entropy, and multi-task settings with weighted combinations of classification and regression terms~\cite{huang2020fusion}. Auxiliary modalities usually enhance representations rather than change the primary loss, although reconstruction or imputation losses can regularise models when modalities are missing~\cite{haq2025mmml}.
+
+Self-supervised and contrastive frameworks introduce additional objectives to enforce cross-modal consistency. InfoNCE and CLIP-style losses maximise similarity between paired image–text samples while minimising mismatched pairs~\cite{windsor2023vision,ryu2025vlmreview}. Medical adaptations such as BioViL and GLoRIA incorporate both global and local alignment terms, including local ranking or correlation-based losses for aligning image regions with textual phrases~\cite{huang2021gloria}. Reconstruction losses can further encourage one modality to predict another, regularised by $L_2$ penalties~\cite{stahlschmidt2022,krones2025review}. In survival analysis, Cox partial likelihood is used to model time-to-event risk in multimodal settings~\cite{huang2020fusion}, and hybrid tasks (e.g.\ segmentation plus classification) employ composite losses to balance objectives~\cite{oltu2025automated,hasan2024recent}. Consistency- and distillation-based penalties have also been proposed for handling missing modalities and improving robustness~\cite{huang2020fusion,fang2024aligning}.
+
+Recent models integrate more advanced objectives, including RL for multimodal generation (e.g.\ MedVLM-R1)~\cite{pan2025medvlm} and joint alignment-plus-cross-entropy schemes to reduce hallucinations in VLM outputs~\cite{ryu2025vlmreview}. Adversarial and distillation losses have been explored for realistic report generation and missing-modality learning~\cite{fang2024aligning}. Overall, the main challenge lies less in inventing new losses than in appropriately weighting existing ones and ensuring effective gradient flow through all modality branches~\cite{mohsen2022artificial}.
+
+\subsection{Summary} \label{sec:conclusion-lit}
+
+In summary, multimodal fusion strategies in medical imaging span early, intermediate, and late integration, each offering distinct trade-offs in complexity, performance, and interpretability~\cite{mohsen2022artificial,kline2022multimodal}. Early fusion remains simple and widely adopted, often outperforming unimodal baselines~\cite{mohsen2022artificial,kline2022multimodal}. Intermediate fusion, particularly attention- and transformer-based designs, enables joint feature learning and frequently delivers state-of-the-art results~\cite{mohsen2022artificial,zhou2023transformer,simon2025multimodal}. Late fusion serves as a practical, interpretable benchmark and can be advantageous when modalities are heterogeneous or asynchronously available~\cite{mohsen2022artificial,huang2020multimodal,lu2024deep}.
+
+A major recent development is the emergence of VLMs and multimodal foundation models, which align images, text, and textualised structured data within shared latent spaces~\cite{ryu2025vlmreview,radford2021learning,boecking2022biovil,huang2021gloria,park2020contrastive,zhang2023biomedclip}. Approaches such as AutoRad-Lung and FM-Bridge suggest that converting radiomics and clinical variables into descriptive text may be a powerful strategy for leveraging VLMs in medical imaging~\cite{khademi2025autorad,huang2025fmbridge}. This thesis builds on these ideas by applying textualisation and VLM-based fusion to 3D renal CT, treating the VLM as a multimodal feature extractor for supervised subtype classification. Loss-function design in multimodal learning typically combines standard supervised objectives with contrastive or consistency terms to ensure effective cross-modal alignment~\cite{windsor2023vision,huang2021gloria,haq2025mmml}. Across tasks and modalities, meta-analyses show that multimodal models reliably outperform unimodal counterparts when properly optimised~\cite{kline2022multimodal,haq2025mmml,simon2025multimodal,huang2020fusion,mohsen2022artificial}.
+
+Persistent challenges include missing modalities, robustness and fairness across populations, and the need for interpretable models~\cite{kline2022multimodal,YANG202229,haq2025mmml}. Explainable AI tools such as attention visualisation and prototype-based reasoning can clarify modality contributions and improve clinician trust~\cite{YANG202229,diao2025ppal}. Future directions focus on unified architectures for images, text, and structured data; integration of large language models for medical reasoning; and efficient, distilled multimodal systems suitable for deployment~\cite{zambrano2025smallmm,Vanguri2022,zhoudeep}. More broadly, multimodal DL is evolving towards holistic, interpretable, and clinically grounded AI systems that better reflect the complexity of real-world patient care.
+
+\section{Interpretability and Explainability in Medical AI}
+
+In safety-critical settings such as medical imaging, interpretability—the ability to understand how a model reaches its predictions—is increasingly seen as essential for clinical adoption~\cite{abgrall2024should,chen2022explainable}. Surveys indicate that many clinicians remain sceptical of “black-box” AI systems; for example, 71\% of ICU clinicians report uncertainty about AI reliability~\cite{abgrall2024should}. Interpretability helps bridge this trust gap by allowing experts to verify that AI reasoning aligns with medical knowledge and ethical standards, and it supports emerging regulatory requirements such as the EU AI Act~\cite{abgrall2024should}. While often conflated, interpretability differs from post hoc explainability: interpretable models are inherently transparent (e.g.\ linear models, decision trees)~\cite{houssein2025explainable}, whereas explainability methods (e.g.\ LIME, SHAP) approximate the logic of complex models without fully revealing their internal workings~\cite{houssein2025explainable}. Recent accountable-AI frameworks advocate prioritising inherently interpretable components and using post hoc explanations as complementary tools~\cite{singh2025beyond,napravnik2025lessons}.
+
+Empirical studies show that well-designed explanations improve trust calibration and decision quality~\cite{chen2022explainable,vani2025personalized}. Heatmaps and saliency maps help radiologists assess whether a model attends to clinically relevant regions~\cite{vani2025personalized,napravnik2025lessons}, and pretraining on radiology-scale data can yield more meaningful visual explanations~\cite{napravnik2025lessons}. Explanations must remain human-centred—understandable, contextual, and clinically actionable~\cite{chen2022explainable}—especially in oncology, where opaque reasoning remains a major barrier despite high reported accuracies~\cite{hrinivich2023interpretable}. Interpretability also supports bias detection and error analysis before patient harm occurs~\cite{abgrall2024should}. Accordingly, recent work argues for explicitly trading a small amount of accuracy for greater transparency when necessary~\cite{singh2025beyond}.
+
+For multimodal medical AI, interpretability is increasingly viewed as a practical necessity rather than an optional add-on~\cite{napravnik2025lessons,vani2025personalized}. While post hoc explainability remains useful for complex models, recent work emphasises designing transparency into model architectures from the outset~\cite{singh2025beyond}. This includes choosing structures amenable to explanation (e.g.\ attention mechanisms, case-based reasoning, generative rationales) and ensuring outputs are human-verifiable~\cite{sharma2025xai}. Inherently interpretable models, which combine explicit risk factors with imaging evidence in transparent ways, tend to align better with clinical reasoning and support more reliable decision-making than opaque black-box systems~\cite{houssein2025explainable,vani2025personalized,jungmann2023algorithmic}. Interpretability also involves communication: dashboards, interactive visualisations, and query-based interfaces can surface AI reasoning in clinician-friendly formats~\cite{pahud2024orchestrating,sharma2025xai}. Achieving an appropriate balance between performance and interpretability will be crucial as multimodal AI transitions from research into routine clinical use~\cite{vani2025personalized,chen2022explainable}.
+
+\subsection{Interpretability across fusion strategies}
+
+Explaining multimodal models is particularly challenging because they must reveal not only which features influence predictions but also how modalities interact. Early fusion tends to entangle features from all inputs, making it difficult to attribute importance to specific modalities. In such models, explanations rely on global feature-importance or perturbation-based methods (e.g.\ SHAP)~\cite{sharma2025xai,vani2025personalized}, as well as occlusion experiments to quantify each modality’s impact~\cite{vani2025personalized}. However, high-dimensional image embeddings may dominate smaller feature sets, reducing clarity and leaving these models effectively black boxes.
+
+Intermediate fusion can improve interpretability by keeping modality-specific branches separate until mid-level integration~\cite{stahlschmidt2022}. This structure allows the use of modality-specific XAI techniques—e.g.\ Grad-CAM for imaging and SHAP for clinical features—followed by inspection of fusion weights or attention maps to assess cross-modal contributions~\cite{sharma2025xai}. Attention-based fusion may align image regions with text tokens, more closely reflecting radiological reasoning~\cite{sharma2025xai}. Gating mechanisms that assign instance-specific modality weights offer additional transparency~\cite{sharma2025xai}. Nonetheless, attention weights do not automatically guarantee faithful explanations and require validation~\cite{napravnik2025lessons,pahud2024orchestrating}.
+
+Late fusion, which combines separate unimodal predictions, offers the greatest modality-wise transparency but limited insight into interactions. Clinicians can interpret each branch independently, using heatmaps for imaging and feature charts for clinical data, mirroring multidisciplinary reasoning~\cite{abgrall2024should}. Ensemble-level XAI methods can approximate cross-modal effects~\cite{sharma2025xai}. While late fusion may sacrifice some representational synergy, its modularity and clarity make it attractive in safety-critical workflows~\cite{abgrall2024should}.
+
+\subsection{Vision–language and foundation models}
+
+VLMs naturally support more intuitive explanations by operating directly on images and text. Rather than exposing only abstract feature vectors, they can generate natural-language justifications for predictions, aligning AI reasoning with radiological narratives~\cite{sharma2025xai,pahud2024orchestrating}. Attention maps in CLIP-style models reveal associations between image regions and semantic tokens, while architectures such as GLoRIA explicitly link patches to descriptive words~\cite{napravnik2025lessons,huang2021gloria}. Textualisation of non-image inputs (e.g.\ lab values, genomics, radiomics) further enhances interpretability by mapping heterogeneous data into a shared language space~\cite{sharma2025xai}. However, VLMs can hallucinate or overgeneralise, motivating the use of factuality constraints and RLHF to ensure clinically reliable explanations~\cite{pahud2024orchestrating}. As multimodal foundation models mature, they hold promise for systems that combine strong predictive performance with human-readable, clinically meaningful explanations.
+
+\subsection{Clinician acceptance and evaluation of XAI}
+
+Clinician acceptance is central to effective interpretability. Studies indicate that personalised, case-specific explanations improve trust and support appropriate reliance on AI recommendations~\cite{vani2025personalized}. Vani \textit{et al.} showed that SHAP- and attention-based visualisations enhanced physicians’ understanding of model outputs~\cite{vani2025personalized}, while other work argues that explainable AI can increase guideline adherence when explanations are clear and contextually relevant~\cite{abgrall2024should,houssein2025explainable}. Poor or misleading explanations, by contrast, may reduce safety and confidence~\cite{abgrall2024should,napravnik2025lessons}. Consequently, a “clinician-in-the-loop” approach is increasingly advocated, where experts evaluate AI explanations through user studies comparing diagnostic performance with and without explanations~\cite{napravnik2025lessons,vani2025personalized}. Standards for clinical explainability, such as understandability, truthfulness, and actionability, are being proposed~\cite{pahud2024orchestrating,jin2023guidelines}, and professional societies and regulators now highlight interpretability as a key requirement for future AI approval~\cite{abgrall2024should,houssein2025explainable}.
+
+
+
+
+
+\section{Research Gaps}
+
+First, renal CT imaging research still relies predominantly on handcrafted radiomics with conventional ML classifiers, with limited use of DL and few controlled comparisons between the two paradigms. Reported performances vary widely owing to differences in imaging phase, feature extraction, and evaluation criteria, leading to poor reproducibility and generalisability.
+
+Second, although high-quality public datasets such as KiTS23 and TCGA/TCIA exist, they are not yet systematically exploited, and external validation remains uncommon. Standardised pipelines and benchmark evaluations on public data are needed to enable robust comparison across studies.
+
+Third, while prior work highlights the potential of early, intermediate, and late fusion, as well as transformer-based and VLM approaches, renal tumour imaging has seen few systematic comparisons of these multimodal strategies or analyses of how fusion mechanisms affect accuracy, robustness, and interpretability. In particular, textualising radiomics features and aligning them with images within a VLM framework remains largely unexplored, despite its promise for improving clinical transparency and human-understandable reasoning.
+
+Fourth, most existing studies omit patient-level metadata that could enrich the multimodal context, and rarely quantify robustness to missing modalities or interpretability aligned with radiologist reasoning. Without explicit assessment of how models communicate their decision rationale, the translational value and clinical trustworthiness of multimodal AI remain uncertain.
+
+Finally, although recent work has proposed various multimodal loss functions, task-specific strategies for balancing supervised objectives with cross-modal alignment and consistency losses in 3D renal CT classification are still underexplored.
+
+In summary, this thesis addresses these gaps by: (1) establishing reproducible baselines with external validation on public 3D CT datasets; (2) systematically comparing multiple fusion strategies, including transformer-based and textualised VLM-based integration of radiomics; (3) incorporating patient metadata to build tri-modal models; and (4) analysing loss-function designs that balance supervised and cross-modal learning. Together, these directions aim to improve fusion efficacy, robustness, and interpretability, and to support clinically trustworthy, explainable multimodal AI for renal tumour analysis.
+
+Based on the research gaps explored in the literature review, this thesis aims to answer the  research questions mentioned in section~\ref{rq}.
+        
+        
+% \begin{itemize}
+%     \item \textbf{RQ1:} How can radiomics and DL representations be effectively integrated to improve texture-based classification performance across medical imaging modalities?
+
+%     \item \textbf{RQ2:} What are the most effective feature-fusion strategies, including conventional numerical fusion and advanced VLM-based approaches, for aligning radiomic features with imaging representations?
+
+%     \item \textbf{RQ3:} To what extent can the proposed multimodal frameworks, incorporating radiomics, imaging, and metadata, enhance accuracy, robustness, and interpretability in 3D CT-based renal tumour classification?
+
+%     \item \textbf{RQ4:} How well do the interpretive mechanisms and textual outputs of the proposed models align with radiological reasoning, and how can expert evaluation be used to validate their clinical interpretability?
+% \end{itemize}
+
+
+
+
+
+
+
+
+
+
+            
+        
+\chapter{Methodology and Results}\label{chap:field}
+
+\section{Introduction}\label{sec:method_intro}
+This chapter presents the methodological progress made to date, focusing primarily on evaluating whether DL can feasibly perform texture-based tumour classification, thereby addressing RQ1. Section~\ref{Sec:texture} establishes a radiomics-only baseline on the KiTS23 dataset, while Section~\ref{Sec:fang} validates the technical feasibility of integrating radiomics with deep features in a lightweight 2D setting. Section~\ref{sec:fusion_models} extends these fusion strategies to 3D CT data, providing further evidence for RQ1 and laying essential groundwork for RQ2 by exploring how different fusion mechanisms may influence model performance. These studies collectively form the empirical basis for the more advanced multimodal fusion investigations planned in subsequent work.
+
+\section{Renal Cell Carcinoma Texture Analysis with KiTS23 Dataset \textcolor{blue}{\uline{(under review as a journal article)}}}\label{Sec:texture}
+To address RQ1, “How can radiomics and DL representations be effectively integrated to improve texture-based classification performance across medical imaging modalities?”, an appropriate dataset is selected to perform texture analysis using a combination of traditional ML and radiomics features. The results of this approach serve as a benchmark for subsequent comparisons with DL and feature fusion methods.
+
+\subsection{Dataset}\label{subsec:summative_methodology}
+The KiTS23 dataset is part of the Kidney Tumour Segmentation Challenge 2023~\cite{kitsIntro}. The detail of the dataset is introduced in section~\ref{Sec:dataset}.
+% The dataset is specifically designed to aid in the automatic segmentation of kidney tumours and surrounding structures from CT scans, supporting the development of tools for more accurate and efficient diagnosis and treatment planning for renal cancer. The KiTS23 training set with $488$ cases has been used for radiomics feature extraction in this study.
+
+% The dataset consists of preoperative contrast-enhanced abdominal CT scans from patients who underwent partial or radical nephrectomy for kidney tumours. It includes imaging data from a diverse range of clinical settings, capturing a wide variety of tumour sizes, shapes, and stages, along with different kidney and anatomical variations. Each image is accompanied by ground-truth annotations that are meticulously curated to facilitate robust training and evaluation of segmentation algorithms.
+
+% The labelling strategy used in KiTS23 is of paramount importance, as it ensures that the dataset can be effectively used for developing and benchmarking DL models. Each CT scan is manually segmented by trained experts, following a structured protocol to delineate the kidney, tumour, and cysts (if present). This multi-class segmentation approach ensures that models can be trained not only to identify tumours but also to segment other key renal structures, which is crucial for comprehensive surgical planning. Furthermore, the annotations are voxel-wise, meaning that each voxel (3D pixel) of the image is labelled, allowing for very fine-grained analysis.
+
+% This rigorous labelling strategy enables the development of ML models that can accurately segment not only the tumour but also distinguish it from other structures, improving the utility of these models in clinical decision-making.
+
+% Additionally, the KiTS23 dataset includes patient metadata such as clinical outcomes, demographics, tumour subtypes, and surgical details, which allows for more comprehensive analyses, such as tumour classsification, predicting prognosis or treatment outcomes based on tumour morphology and segmentation.
+
+\subsection{Results}
+\label{sec:analysis}
+
+This section presents the ML models integrated with RFE used for statistical analysis in this study and provides a comparative summary of their performance. The objective of the statistical analysis is to distinguish between ccRCC and other types of renal tumours. In the dataset, the number of ccRCC cases and other types of tumours is balanced, with an approximate ratio of $6.5$:$3.5$.
+% Figure~\ref{fig:subtype} illustrates the distribution of tumour types within the dataset, showing that the number of ccRCC cases exceeds that of other tumour types. However, overall, the dataset maintains a balance between ccRCC and other tumours.
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.6\textwidth]{Figures/subtype dis.png}
+%   }
+%   \caption{Distribution of tumour types within the dataset.} 
+%   \label{fig:subtype}
+% \end{figure*}
+
+The ML models employed for classification include Random Forest, Support Vector Classifer (SVC), Gradient Boosting, and Logistic Regression. Among the four models, the Logistic Regression exhibited significantly better performance compared to the other three models. Specific comparisons of their performances are detailed in the evaluation subsection. 
+
+% \subsection{Model Training}
+
+% The four models, Random Forest, SVC, Gradient Boosting, and Logistic Regression, were each combined with both LASSO feature selection and RFE feature selection. Comparative analysis of their performance indicates that RFE consistently outperforms LASSO across all four models. During the training phase, a five-fold cross-validated grid search was employed for each model to approximate the optimal parameters. Notably, in the SVC model, a linear kernel was employed instead of a nonlinear kernel, as comparisons of their performances suggest that the dataset is linearly separable. 
+
+\subsubsection{Quantitative Evaluation}
+
+% \begin{figure*}[htb]
+%   \centering
+%   \subfloat[SVC]{
+%   \includegraphics[height=0.32\textwidth]{Figures/lr curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/svc curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/rf curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/gbc curve.png}
+%   }
+%   \caption{Performance plots during the RFE feature selection process. Plot (a) is for the SVC model, (b) is for the Logistic Regression model. five evaluation metrics were utilised: accuracy, area under the curve (AUC), precision, sensitivity, and specificity.} 
+%   \label{fig:plot}
+% \end{figure*}
+
+% \begin{figure*}[htb]
+%  \centering
+%   {
+%   \includegraphics[height=0.64\textwidth]{pictures/Figure_3.png}
+%   }
+%   \caption{Performance plots during the RFE feature selection process. Plot (a) is for the SVC model, (b) is for the Logistic Regression model, (c) is for the Random Forest model, and (d) is for the Gradient Boosting Classifier model. Five evaluation metrics were utilised: accuracy, area under the curve (AUC), precision, sensitivity, and specificity.} 
+%   \label{fig:plot}
+% \end{figure*}
+
+
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.5\textwidth]{pictures/sen spe.png}
+%   }
+%   \caption{Sensitivity and specificity curve for four models with the optimal number of features. The specificity curve is unified due to different thresholds for four models.} 
+%   \label{fig:ssc}
+% \end{figure*}
+
+% \begin{figure*}[htb]
+%   \centering
+%   \caption{Evaluation scores of the classification for the four benchmarking methods: Random Forest, SVC, Gradient Boosting, and Logistic Regression.} 
+%   {
+%   \includegraphics[height=0.5\textwidth]{pictures/table.png}
+%   }
+  
+%   \label{fig:table}
+% \end{figure*}
+
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}  % 标题居中
+\caption{Evaluation scores of the classification for the four benchmarking methods: Random Forest, SVC, Gradient Boosting, and Logistic Regression}
+\label{table:1}
+\small
+\begin{tabular}{@{}lcccc@{}}  % @{}移除列前后的空格
+\toprule
+\textsf{Metric (\%)} & \textsf{Random Forest} & \textsf{SVC} & \textsf{Gradient Boosting} & \textsf{Logistic Regression} \\
+\midrule
+Accuracy           & $74.1 \pm 2.45$ & $71.2 \pm 2.65$ & $70.0 \pm 3.8$ & $\textbf{75.1} \pm 4.4$ \\
+AUC                & $77.9 \pm 4.85$ & $77.5 \pm 3.65$ & $73.8 \pm 6.1$ & $\textbf{79.6} \pm 5.0$ \\
+Precision          & $78.0 \pm 3.9$ & $74.2 \pm 2.5$ & $74.2 \pm 3.0$ & $\textbf{78.1} \pm 3.0$ \\
+Sensitivity        & $83.9 \pm 3.85$ & $84.6 \pm 3.95$ & $81.8 \pm 2.5$ & $\textbf{85.0} \pm 5.3$ \\
+Specificity        & $56.7 \pm 10.95$ & $47.1 \pm 8.35$ & $49.0 \pm 7.7$ & $\textbf{57.3} \pm 6.8$ \\
+\midrule
+Number of Features & 14   & 10   & 16   & 41 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In this study, five evaluation metrics were utilised: accuracy, Area Under the Curve (AUC), precision, sensitivity, and specificity. The $0.95$ confidence intervals for each metric of every model were also calculated, and all performance metrics were obtained using five-fold cross-validation. During the recursive feature elimination (RFE) process, model performance was tracked as the number of selected features varied. The SVC model achieved its highest AUC when RFE retained only $10$ features, whereas the Logistic Regression model reached its peak AUC with a broader set of $41$ features. Please refer to Table~\ref{table:1} for the number of features corresponding to the optimal AUC for each model, together with their performance across the other evaluation metrics.
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.48\textwidth]{pictures/Figure_4.png}
+%   }
+%   \caption{ROC curve for four models with the optimal number of features.} 
+%   \label{fig:roc}
+% \end{figure*}
+A comparison of model performances in Table~\ref{table:1} clearly shows that the Logistic Regression classifier excels in identifying clear cell renal cell carcinoma (ccRCC), achieving the highest scores across all five metrics, with an AUC of $0.796$. 
+% Figure~\ref{fig:roc} displays the ROC curves for all four models when the optimal number of features was selected through the feature selection process. A higher AUC indicates that the model exhibits a high level of robustness.
+
+
+% Figure~\ref{fig:ssc} shows the sensitivity and specificity curve for all four models when the optimal features are selected for training. The intersection of curves at the $0.6$ threshold represents an optimal balance point for the trade-off between sensitivity and specificity, which is crucial for clinical diagnostic tasks where high sensitivity is particularly important.
+
+
+
+
+\section{Fusing Radiomics Features with Deep Representations for Gestational Age Estimation in Fetal Ultrasound Images \textcolor{blue}{\uline{(Accepted at MICCAI 2025)}}}\label{Sec:fang}
+
+To address RQ1, which concerns the integration of radiomics and DL representations for improved texture-based classification, an initial feasibility study was conducted on gestational age (GA) estimation using lightweight 2D fetal ultrasound images. This provided a controlled setting for evaluating fusion strategies before extending the methodology to 3D CT-based renal tumour analysis.
+
+This work introduces a feature-fusion framework that integrates radiomics features with CNN-derived deep representations of the fetal head to improve GA prediction. Two fetal ultrasound datasets were used to assess the approach, and both ML and DL baselines were included for comparison. The main contributions are: (i) proposing the first framework that fuses radiomics and ultrasound images for GA estimation; (ii) introducing a plug-and-play cross-attention module for effective fusion of radiomics and deep features; and (iii) demonstrating, through comprehensive experiments, the superiority of the fusion module over unimodal ML and DL models.
+
+\subsection{Datasets}
+Two publicly available datasets were employed in this study. The Spanish trans-thalamic dataset (ES-TT) originates from two centres in Spain \cite{Xavier:2020}, while the HC18 dataset was sourced from a database in the Netherlands \cite{Heuvel:2018_b}. All scans were acquired from healthy singleton pregnancies. The HC18 data were collected using two ultrasound machines at a single centre, whereas ES-TT data were obtained from six machines across two different centres. Owing to the variability of the fetal head morphology across different pregnancy trimesters, an additional challenge arises in the estimation of GA. The two datasets were combined and partitioned in a 70:30 ratio for training and testing. From the test set, a subset of 100 images was randomly selected for validation purposes.
+\subsection{Methodology}
+
+An overview of the fusion framework is shown in Fig.~\ref{fusion_network}. It consists of three key components: (1) a pre-trained ConvNeXt network~\cite{Liu:2022} for learning deep representations; (2) a Python-based pipeline for radiomics feature extraction; and (3) a cross-attention module that fuses radiomics and deep features for GA prediction.
+
+
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{pictures/fusion_network.drawio.png}
+\caption{Proposed fusion framework for GA estimation from fetal ultrasound images. \textit{Blue}: Trainable (DL model, cross-attention, MLP). \textit{Gray}: Non-trainable (Radiomics)}\label{fusion_network}
+\end{figure}
+
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\textwidth]{pictures/modules.drawio.png}
+% \caption{Visualisation of CNBlock and Cross-attention module. \textbf{(a)} is an example of CNBlock with channel size 96; \textbf{(b)} represents the cross-attention module for integrating radiomics features and deep representations. LN: Layer Normalization} \label{modules}
+% \end{figure}
+
+
+
+The proposed framework employs the CNN topology to construct the DL model to learn deep representations that reflect high-level semantic information of ultrasound images. Specifically, the study incorporate models ResNet18 \cite{resnet}, SwinTransformer \cite{Liu:2022b}, EfficientNet V2 \cite{Tan:2021}, MobileNet V3 \cite{Howard:2019}, ViT \cite{Dosovitskiy:2020_b}, MaxViT \cite{Tu:2022}, and ConvNeXt \cite{Liu:2022} for their proven effectiveness in image classification tasks. %The technical details of these DL architectures are documented in prior research \cite{He:2016,Howard:2019,Dosovitskiy:2020_b,Tan:2021,Liu:2022b,Tu:2022,Liu:2022}. 
+The DL model in the proposed framework adopts the ConvNeXt stack architecture. Features are passed to a cross-attention module to perform a fusion operation. 
+% with four layers. Each layer consists of a CNBlock followed by a convolution layer. The CNBlock layers have channel size of 96, 192, 384, and 768, respectively. The detailed illustration of the CNBlock structure is shown in Fig.~\ref{modules}(a).
+
+% \hl{COMMENT: superscript dimensions for X is not very consistent. Maybe drop and instead say $X\in\mathbb{R}^{3\times n_h\times n_w}$. Keep consistent notation for all dimensions, maybe something like lowercase italic $n_{whatever}$. So when you encounter $n$ with subscript you know that it is a dimension of some kind. A}
+
+% The fetal ultrasound image $X_\text{US}\in\mathbb{R}^{3\times n_\text{h}\times n_\text{w}}$ is processed by the model $f_{\theta}$, producing a deep representation vector that is subsequently fed to the $\ReLU$ activation and linearly combined to output $\bm{x}_\text{DL}\in\mathbb{R}^{256}$, as follows:
+% \begin{align}
+% \label{deepmodel_eq}
+% \bm{x}_\text{DL} & = W_{\text{DL}} \cdot f_{\theta}(X_\text{US}) + b_{\text{DL}}
+% \end{align}
+% The input ultrasound data $X_\text{US}$ has dimensions of $3 \times n_\text{h} \times n_\text{w}$, where $n_\text{h}$ and $n_\text{w}$ represent the height and width of the image, respectively.
+% Subsequently, $\bm{x}_\text{DL}$ is fused with radiomics features $\bar{\bm x}_{\text{RAD}}$ within the cross-attention module.
+
+% \subsubsection{Radiomics Features}
+
+
+% % \hl{COMMENT: in order to get rid of the ugly superscript, how about calling $X_\text{US}$ the $3\times n_h\times n_w$ input and $X_\text{ROI}$. Just provide dimensions in text.}
+
+% Our dataset comprises fetal head ultrasound images and corresponding region of interest (ROI) masks, denoted as $X_\text{US}$ and $X_\text{ROI}$, respectively.
+% The input $X_\text{ROI}$ has dimensions of $1 \times n_\text{h} \times n_\text{w}$, where $n_\text{h}$ and $n_\text{w}$ correspond to the height and width of ROI image.
+% The process of extracting radiomics features utilizes each pair of $X_\text{US}$ and $X_\text{ROI}$ as input. In this study, a total of 95 radiomics features $\bm{x}_{\text{RAD}} \in \mathbb{R}^{95}$, which capture surface-level details of the fetal head region, are extracted with the publicly accessible Python package, \verb|pyradiomics|\footnote{https://pyradiomics.re adthedocs.io/en/latest/}. These extracted features are categorized into shape, statistical (first order), and texture features \cite{Fan:2021,Aerts:2014,Griethuysen:2017}.
+
+% The size of features in six categories is 9, 18, 22, 16, 16 and 14. 
+% The radiomics features can be categorized into six groups: shape features (2D), first order features, and texture features consist of gray level co-occurrence matrix (GLCM), gray level run length matrix (GLRLM), gray level size zone matrix (GLSZM), gray level dependence matrix (GLDM) features. Before the feature fusion step, we standardize radiomics features $\bm x_{\text{RAD}} $ by removing the mean and scaling to unit variance to obtain $\bar{\bm x}_{\text{RAD}} \in \mathbb{R}^{95}$. Subsequently, these standardized features $\bar{\bm x}_{\text{RAD}}$ are used as the input to the cross-attention module.
+
+% The standardized features, denoted as $\bar{X_r}$, are derived by subtracting the mean and scaling to unit variance. Subsequently, $\bar{X_r}$ are used as the input to the cross-attention module.
+
+%The standardized features, $\bar{X_r}$, are performed by removing the mean and scaling to unit variance with Python package, sklearn \verb|standardscaler|\footnote{https://scikit-learn.org/stable/}. Then $\bar{X_r}$ serves as the input to the cross-attention module. %The process of extracting radiomics features can be defined as below:
+
+% \begin{equation}\label{pyradiomic}
+% \begin{split}
+% X_r &= PyRadiomics(X^{C \times H \times W}, X^{H \times W}_{roi}) \\
+% \bar{X_r} &= StandardScaler(X_r)
+% \end{split}
+% \end{equation}
+
+% \begin{equation}\label{pyradiomic}
+% \bar{X_r} = \verb|standardscaler|(\verb|pyradiomics|(X^{C \times H \times W}, X^{H \times W}_{roi}))
+% \end{equation}
+% where $\bar{X_r}$ represents the output features after radiomics feature extraction process and serves as the input to the cross-attention module.
+
+
+
+% \subsubsection*{Feature Fusion}
+
+% \hl{TODO: Watch out your notation, should be consistent. scalar italic e.g. $x$, vector bold $\bm x$, matrix upper case $W$ or $\text{W}$ but keep it consistent. I started to modify but need to be completed. Maybe used XA for Cross-attention subscript?}
+% Features are passed to a cross-attention module to perform a fusion operation. 
+% The cross-attention module in the model has an embedding size of $512$ and is linked to a multi-layer perceptron (MLP) module. The MLP module consists of two fully connected layers with a hidden feature size of 512 and the $\ReLU$ activation layer. Firstly, input feature $\bar{\bm x}_{\text{RAD}}$ is linearly projected to queries ${\bm q}=W_\text{Q} \bar{\bm x}_{\text{RAD}} + b_\text{Q}$ $({\bm q} \in \mathbb R^{d_e})$, and feature ${\bm x}_\text{DL}$ is linearly projected to keys ${\bm k}=W_\text{K} {\bm x}_\text{DL} + b_\text{K}$ $({\bm k} \in \mathbb R^{d_e})$, and values ${\bm v}=W_\text{V} {\bm x}_\text{DL} + b_\text{V}$ $({\bm v} \in \mathbb R^{d_e})$. 
+%The projection process can be defined as follows:
+% \begin{equation}
+% \begin{split}
+% Q &= Linear(\bar{X_r}, d\_emb) \\
+% K &= Linear(X_f, d\_emb) \\
+% V &= Linear(X_f, d\_emb) 
+% \end{split}
+% \end{equation}
+% $d_e$ represents the dimension of hidden embeddings. In our framework, $d_e$ is set to 512. Next, the scaled dot-product attention is employed in the cross-attention module. Mathematically, it can be expressed as:
+
+% \begin{equation}
+% X_\text{XA} = \operatorname{softmax}\left(\frac{{\bm q} {\bm k}^{\top}}{\sqrt{d_{\bm k}}}\right) {\bm v} = {A}_\text{XA} {\bm v}
+% \end{equation}
+% where ${A}_\text{XA} \in \mathbb{R}^{d_{\bm q} \times d_{\bm k}}$ is the attention weight matrix, and $d_{\bm k}$ is the feature dimension of ${\bm k}$. The attention score $({\bm q} {\bm k}^{\top} \in \mathbb{R}^{d_{\bm q} \times d_{\bm k}})$ is computed between each query and all keys. Normalization is done across the key dimension to obtain attention weights $\text{A}_\text{XA} = \operatorname{softmax}(\cdot)$.
+% The MLP module processes the cross-attention module's output to predict GA (denoted as $\hat{y} \in \mathbb{R}$) as follows:
+
+% \begin{align}
+% \bm{y}_\text{XA} &= \ReLU( W_\text{XA} \cdot \vecop(X_\text{XA}) + b_\text{XA}\;) \\
+% \hat{y} &= W_\text{MLP} \cdot \bm{y}_\text{XA} + b_\text{MLP}
+% \end{align}
+% where $\vecop(\cdot)$ is the flatten function, and $\bm{y}_\text{XA} \in \mathbb{R}^{512}$ is a feature vector.
+
+% \subsubsection{Model Training and Loss Functions}
+
+% \def\angled#1{{\langle #1 \rangle}}
+
+% We employ a fine-tuning strategy for our framework, initializing the DL models with pre-trained weights from ImageNet \cite{Deng:2009}. We optimize the likelihood of the $\hat{y}$ regression output and therefore use the least squares for the overall training loss: $\mathcal{L} = \sum_{i=1}^M\left(y^\angled{i}-\hat{y}^\angled{i}\right)^2$, 
+% %
+% % \hl{Note: As mentioned, taking $\sqrt$ and dividing by $N$ does not change anything in terms of optimization, just wasting computation resources. Your loss should be the least squares. RMSE is used as performance measure. Also I generally prefer to use $M$ for the cardinality of the training set.} 
+% %
+% % \begin{equation}
+% % % \mathcal{L}(\hat{y},y_i) = \sqrt{MSE(\hat{y},y_{gt})}
+% % % \mathrm{RMSD}=\sqrt{\frac{\sum_{i=1}^N\left(x_i-\hat{x}_i\right)^2}{N}}
+% % \mathcal{L} = \sum_{i=1}^M\left(y^\angled{i}-\hat{y}^\angled{i}\right)^2
+% % \end{equation}
+% where $\hat{y}^\angled{i}$ is the model predicted GA for the $i^\text{th}$ training input and $y^\angled{i}$ is the computed GA as described in Section~\ref{data_desc}. $M$ is the size of the training set. The model with the best performance is selected and saved for testing based on their predictive accuracy during the model training phase.
+
+% \textbf{ML.} In our extensive analysis, we build traditional ML models for predicting GA using radiomics features exclusively. These models include %Linear Regression, 
+% Support Vector Machine (SVM), K-Nearest Neighbors (KNN), Random Forest (RF), AdaBoost, Ridge and Gradient Boosting Regression (GBR). Additionally, we perform feature selection, including recursive feature elimination (REF) and least absolute shrinkage and selection operator (LASSO), to improve the performance of ML models.
+
+
+\subsection{Results}
+
+GA prediction accuracy was evaluated using MAE and RMSE, which were highly correlated ($r > 0.998$); therefore, only MAE is reported. For ML models, the coefficient of determination ($R^2$) was additionally used to assess model fit. As shown in Table~\ref{test_results}, the proposed framework achieved the best performance with an average MAE of 8.0 days. The cross-attention module significantly improved GA estimation compared with both the concatenation module ($p < 0.001$) and the baseline model ($p < 0.001$). Although ResNet18 and EfficientNet V2 showed slightly higher MAE under cross-attention than under concatenation, overall performance across all architectures was still significantly better with cross-attention ($p < 0.001$), demonstrating the advantage of the fusion mechanism.
+
+Table~\ref{ml_models} summarises the performance of radiomics-based ML models. While GBR with RFE achieved the highest $R^2$, its MAE remained substantially higher than that of the proposed framework. Overall, the fusion approach consistently outperformed all ML baselines.
+
+
+\begin{table}[tb]
+\parbox{.51\linewidth}{
+\centering
+\caption{Test results of GA estimation by integrating DL models with concatenation and cross-attention mechanisms are compared. C: Concatenation. XA: Cross-attention.}\label{test_results}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{lcc|c|c}
+\hline
+DL Model & C & XA & MAE $\downarrow$ & P-value\\
+\hline
+ResNet18 & \xmark & \xmark & 9.9 & \\
+EfficientNet V2 & \xmark & \xmark & 9.3 & \multirow{3}{*}{<$10^{-3}$ } \\ % \cite{Wang:2025} 
+MaxViT & \xmark & \xmark & 10.7 & \\
+SwinTransformer & \xmark & \xmark & 9.4 & \\
+ConvNeXt & \xmark & \xmark & 8.6 & \\
+\hline
+ResNet18 & \cmark & \xmark & 10.2 & \\
+EfficientNet V2 & \cmark & \xmark & 8.6 & \multirow{3}{*}{<$10^{-3}$ } \\
+MaxViT & \cmark & \xmark & 9.6 & \\
+SwinTransformer & \cmark & \xmark & 8.6 & \\
+\hline
+ResNet18 & \xmark & \cmark & 10.4 & \multirow{5}{*}{--} \\
+EfficientNet V2 & \xmark & \cmark & 8.6 & \\
+MaxViT & \xmark & \cmark & 8.7 & \\
+SwinTransformer & \xmark & \cmark & 8.3 & \\
+\textbf{ConvNeXt} & \xmark & \cmark & \textbf{8.0} & \\
+\hline
+\end{tabular}
+}
+\hfill
+\parbox{.46\linewidth}{
+\centering
+\caption{Test results of GA estimation using ML models by employing two techniques to select radiomics features. SVM: Support Vector Machine. KNN: K-Nearest Neighbors. RF: Random Forest. GBR: Gradient Boosting Regression.}\label{ml_models}
+
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{l|c|c}
+\hline
+ML Model & MAE $\downarrow$ & $R^2$ $\uparrow$ \\
+\hline
+SVM (LASSO) & 25.2 & 0.62 \\ 
+KNN (LASSO) & 25.2 & 0.61 \\ 
+AdaBoost (LASSO) & 26.8 & 0.60 \\ 
+Ridge (LASSO) & 25.7 & 0.64 \\ 
+RF (LASSO) & 21.7 & 0.69 \\
+GBR (LASSO) & 21.8 & 0.69 \\
+\hline
+SVM (RFE) & 24.9 & 0.62 \\ 
+KNN (RFE) & 24.5 & 0.62 \\ 
+AdaBoost (RFE) & 26.5 & 0.61 \\ 
+Ridge (RFE) & 25.8 & 0.64 \\ 
+RF (RFE) & 21.4 & 0.69 \\
+\textbf{GBR (RFE)} & \textbf{21.3} & \textbf{0.70} \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\textwidth]{pictures/att_weight_vis.drawio.png}
+\caption{Visualisation of attention weights within our framework.} \label{att_weight}
+\end{figure}
+
+\textbf{Attention Weight Visualisation.}  
+Fig.~\ref{att_weight} shows cross-attention maps from representative cases across the three trimesters. The module highlights complementary patterns between radiomics features and deep representations, particularly in the second and third trimesters. In early-trimester data, attention weights emphasise specific radiomics features such as Inverse Difference and Inverse Difference Moment. These visualisations provide an interpretable indication of how individual radiomics features contribute to GA estimation.
+
+\textbf{Ablation Study.}  
+The contributions of fine-tuning, fusion strategy, and cross-attention were assessed through an ablation study. As shown in Table~\ref{ablation}, fine-tuning with pre-trained weights is essential for good performance, reducing MAE from 28.2 to 8.6 days. Simple concatenation offers minimal additional benefit, whereas incorporating cross-attention further improves accuracy to 8.0 days, confirming its importance for effective fusion of deep and radiomics features.
+
+
+
+\begin{table}[tb]
+\centering
+\caption{Ablation study on the different feature fusion modules and pre-trained weights. Concat: Concatenation. XA: Cross-attention.}\label{ablation}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc|c}
+\hline
+Model & Image & Pretrain & Concat & Cross-attention & MAE $\downarrow$ \\
+\hline
+ConvNeXt & \cmark & \xmark & \xmark & \xmark & 28.2 \\
+ConvNeXt & \cmark & \cmark & \xmark & \xmark & 8.6 \\
+ConvNeXt $+$ Concat & \cmark & \cmark  & \cmark & \xmark & 8.7 \\
+\textbf{ConvNeXt $+$ XA (Ours)} & \cmark & \cmark & \xmark & \cmark & \textbf{8.0} \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Conclusion}
+
+This study presents a feature fusion framework that integrates image-based deep representations with radiomics features to estimate fetal GA from ultrasound images. Evaluated on a lightweight dataset and a simple prediction task, the approach enabled rapid prototyping while still achieving strong predictive performance. These results highlight the value of combining handcrafted and learned features. The successful 2D proof of concept provides a methodological basis for extending the fusion strategy to more complex 3D CT-based renal tumour classification, where multimodal feature integration is likely to have even greater impact.
+
+
+
+
+\section{Fusion-Based DL Models for 3D Renal CT Classification}
+\label{sec:fusion_models}
+
+The experiments presented in this section constitute a central component of the investigation and directly address RQ1, which concerns the effective integration of radiomics and DL representations for improved texture-based classification performance across medical imaging modalities. They also resolve a substantial portion of RQ2 and RQ3, which focus on the identification of the most effective feature-fusion strategies for aligning radiomics features with imaging representations, including both conventional numerical fusion and more advanced approaches that will later involve VLMs. The purpose of the present section is to establish a unified and controlled benchmark that compares radiomics-only ML models, image-only DL models, and a series of multimodal fusion architectures under consistent experimental conditions.
+
+
+\subsection{Methods}
+
+The binary classification task remains the distinction between ccRCC and non-ccRCC tumours as defined earlier in section~\ref{Sec:texture}. All experiments were conducted on the KiTS23 dataset, whose multi-centre origin and varied scanner configurations provide substantial heterogeneity that promotes generalisability. The TCGA dataset is currently being prepared for use as an external test set. A three-way split of approximately 60\% training, 25\% validation, and 15\% testing was adopted for all models to ensure consistent evaluation. For the radiomics-only ML models, the training and validation partitions were pooled to create a larger training set while preserving the identical test set used for all modelling paradigms. The details of the KiTS23 dataset are in section~\ref{Sec:dataset}.
+
+A strengthened preprocessing workflow based on MONAI was applied across all experiments~\cite{cardoso2022monai}. Very small tumours and multi-lesion cases were excluded to avoid unstable segmentation boundaries. Multiple expert annotations were fused using STAPLE in order to obtain consensus tumour masks. Each mask was expanded by twelve voxels in all directions and then cropped to produce standardised volumetric regions of interest suitable for 3D convolutional networks. Radiomics features were extracted from both the original and the Laplacian of Gaussian filtered images. Feature selection was then performed in multiple stages to retain only stable and non-redundant radiomics predictors. A sequence of robustness filtering steps, including ICC, MAD, Pearson correlation, and clustering, reduced the initial 386 features to 71 stable descriptors. LASSO was subsequently applied to derive a compact 5-feature subset used for radiomics-only ML. These five features constitute a highly-reduced radiomics subset that was also evaluated in later fusion experiments
+
+The radiomics-only models were trained using the five LASSO-selected features to establish a compact and interpretable baseline that reduces the risk of overfitting while maintaining discriminatory potential. Several classifiers were evaluated, including Logistic Regression, Gradient Boosting, Random Forests, XGBoost, and SVM with an RBF kernel.
+
+The image-only DL baselines were constructed using a 3D ResNet18 architecture. One model was trained from scratch, while the other was initialised with MedicalNet weights. Both models were trained on the cropped 3D regions of interest using weighted cross-entropy to compensate for the slight class imbalance present in KiTS23.
+
+A series of feature fusion models was then developed to integrate radiomics features with the deep embeddings produced by the 3D ResNet18 encoder. Five fusion mechanisms were examined. The first was simple concatenation, which served as an early-fusion baseline. The second and third were two forms of cross-attention, the first using a shared linear transformation for all radiomics features and the second introducing feature index embeddings to preserve structural information. The fourth model employed gated attention in which radiomics and deep representations were adaptively weighted. The fifth model used an SE-like recalibration mechanism that amplified or suppressed radiomics contributions according to the corresponding deep features. All models were trained and evaluated using identical splits, and their final test performance was assessed primarily using the AUC, with specificity reported for contextual interpretation. All results correspond to those presented in Table~\ref{table:perform}.
+
+\begin{table*}[ht]
+\centering
+\caption{Performance of radiomics-only, DL and fusion models. All metrics are reported as percentages. Fusion-65 models combine image features with all 65 radiomics features, while Fusion-3 models fuse image features with the reduced 3-feature subset.}\label{table:perform}
+\begin{tabular}{p{7cm}cccccc}
+\toprule
+Model & AUC & ACC & F1 & Precision & Recall  & Specificity\\
+\midrule
+\multicolumn{7}{l}{\textbf{ML (Radiomics-only)}} \\
+GradientBoosting         & 69.4 & 71.7 & 78.8 & 82.1 & 76.1 & 61.2 \\
+LightGBM                 & 66.8 & 66.8 & 74.1 & 80.7 & 69.0 & 61.3 \\
+LogisticRegression       & 73.5 & 68.9 & 74.8 & 85.3 & 67.0 & 73.2 \\
+RandomForest             & 69.7 & 65.5 & 70.4 & 86.6 & 59.7 & 78.6 \\
+SVM\_RBF                 & 74.4 & 62.0 & 65.6 & \textbf{88.3} & 52.6 & \textbf{83.8} \\
+XGBoost                  & 67.0 & 65.4 & 71.9 & 82.3 & 64.3 & 67.8 \\
+\midrule
+\multicolumn{7}{l}{\textbf{DL}} \\
+3D ResNet18                          & 52.1 & 63.3 & 75.0 & 71.7 & 78.6 & 27.8 \\
+3D ResNet18 (MedicalNet pre-trained) & 71.0 & 61.7 & 72.9 & 72.1 & 73.8 & 33.3 \\
+\midrule
+\multicolumn{7}{l}{\textbf{Fusion-65}} \\
+Concat                              & 74.9 & \textbf{83.3} & \textbf{88.4} & 86.4 & \textbf{90.5} & 66.7 \\
+Cross Attention (shared Linear)     & 56.5 & 58.3 & 67.5 & 74.3 & 61.9 & 50.0 \\
+Cross Attention V2 (with feature embedding) & 70.2 & 65.0 & 71.2 & 83.9 & 61.9 & 72.2 \\
+Gated Attention                     & \textbf{81.2} & 76.7 & 83.3 & 83.3 & 83.3 & 61.1 \\
+SE-like Radiomics Recalibration     & 67.3 & 65.0 & 73.4 & 78.4 & 69.0 & 55.6 \\
+\midrule
+\multicolumn{7}{l}{\textbf{Fusion-3}} \\
+Concat                              & 70.0 & 66.7 & 75.6 & 77.5 & 73.8 & 50.0 \\
+Cross Attention (shared Linear)     & 70.9 & 56.7 & 61.8 & 80.8 & 50.0 & 72.2 \\
+Cross Attention V2 (with feature embedding) & 73.3 & 75.0 & 81.5 & 84.6 & 78.6 & 66.7 \\
+Gated Attention                     & 79.1 & 81.7 & 86.7 & 87.8 & 85.7 & 72.2 \\
+SE-like Radiomics Recalibration     & 68.4 & 63.3 & 73.8 & 73.8 & 73.8 & 38.9 \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Results}
+
+The radiomics-only ML models showed that a small number of well-selected features can capture meaningful tumour heterogeneity. SVM achieved the strongest baseline (AUC = 0.744), followed by Logistic Regression (AUC = 0.735), while Gradient Boosting, Random Forest, and XGBoost produced AUCs of 0.668–0.697. Specificity remained stable across models, confirming that the Youden-index thresholding provided balanced sensitivity–specificity trade-offs.
+
+Image-only DL models performed notably worse: 3D ResNet18 achieved AUCs of 0.521 (from scratch) and 0.544 (MedicalNet pretraining), with similarly low specificity. These results indicate that volumetric CNNs struggle to learn discriminative renal texture patterns from moderate-sized datasets, and that pretraining offers only marginal benefit.
+
+Multimodal fusion consistently outperformed both unimodal paradigms. Simple concatenation achieved an AUC of 0.749, surpassing all radiomics-only and image-only baselines. The first cross-attention variant, which used a shared linear transformation across radiomics features, performed poorly (AUC = 0.565), suggesting that collapsing individual feature identities limits effective interaction. The refined cross-attention version with feature-index embeddings improved performance to 0.702 and provided a more stable sensitivity–specificity relationship.
+
+Gated attention was the best-performing approach. With the full 71-feature set, it achieved an AUC of 0.812—the highest among all models~\cite{qiu2024gated}—and maintained balanced accuracy and specificity. Even with only 5 radiomics features, it achieved an AUC of 0.791, indicating strong robustness and effective modality-weighting. By adaptively modulating radiomics and deep CT representations, gated attention mitigates heterogeneous feature scales and suppresses modality-specific noise, enhancing generalisation.
+
+The SE-like recalibration module achieved an AUC of 0.673~\cite{hu2018squeeze}, outperforming DL-only baselines but remaining below concatenation and gated-attention fusion. Some fusion variants provided only small gains or slight declines, likely due to suboptimal modality alignment or overfitting, indicating that simple feature merging is insufficient without an interaction mechanism.
+
+Fusion models also enable enhanced interpretability. Attention, gating, and recalibration modules yield explicit feature-weighting patterns that map to radiomics descriptors or spatial CT features. These provide clinically meaningful insight into which quantitative attributes or tumour regions influence predictions—capabilities not available in image-only models. Thus, radiomics–DL fusion offers a transparent cross-modal reasoning framework that supports clinical validation.
+
+Overall, multimodal fusion markedly improves renal tumour texture classification. Radiomics-only models remain strong and interpretable, but DL alone is inadequate for this task. Fusion approaches consistently surpassed unimodal baselines, with gated attention offering the most robust and generalisable performance. These findings directly answer RQ1 and substantially address RQ2 by demonstrating the benefit of integrating radiomics with DL representations and identifying which fusion mechanisms are most effective. The benchmarks established here form the foundation for subsequent experiments involving vision–language fusion and incorporation of clinical metadata, supporting future development of richer multimodal renal tumour classification systems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \chapter{Research Plan}\label{chap:progress}
+% % \section{Future Work Plan}
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\textwidth]{pictures/output (2).png}
+%     \caption{Gantt chart of the planned PhD research activities from September 2025 to September 2027, including key tasks such as 3D model development, feature fusion exploration, benchmarking, external validation, and thesis writing.}
+%     \label{fig:gantt_future_plan}
+% \end{figure}
+
+
+% The remaining period of this PhD project (September 2025 to September 2027) will focus on systematically extending and evaluating the proposed multimodal approach—combining DL with radiomics features—for 3D CT-based renal tumour classification. The overall research schedule for the remaining two years is summarised in Figure~\ref{fig:gantt_future_plan}, which outlines the timeline for each major milestone and deliverable. The future work will follow a structured plan, detailed below:
+
+% \textbf{1. Extension of Multimodal Models to 3D CT-based Renal Tumour Classification (Sep 2025 – Mar 2026)}
+% The multimodal fusion strategy, originally developed and validated in a 2D ultrasound-based gestational age prediction task, will be adapted to 3D volumetric CT data. The Kidney Tumour Segmentation Challenge (KiTS) dataset will serve as the primary data source. Tumour ROIs (Region of Interests) will be segmented using provided annotations. For the radiomics component, 3D radiomics features will be extracted using \texttt{PyRadiomics} on the segmented tumour volumes.
+% The DL backbone will involve 3D CNN architectures such as 3D-ResNet, 3D EfficientNet, and SwinUNETR, pretrained on medical imaging tasks and fine-tuned for RCC subtype classification (e.g., clear cell, papillary, chromophobe) or malignancy prediction.
+
+% \textbf{2. Exploration of Advanced Feature Fusion Strategies (Feb 2026 – Jun 2026)}
+% A key objective will be to investigate how radiomics features can be effectively combined with DL representations in a unified architecture. Fusion strategies to be explored include:
+% \begin{itemize}
+% \item \textbf{Early fusion:} Concatenating raw radiomics features with image input channels or embedding vectors at early network stages.
+% \item \textbf{Late fusion:} Combining prediction logits from separate DL and radiomics branches using ensemble learning techniques (e.g., stacking, majority voting).
+% \item \textbf{Hybrid fusion:} Using attention-based mechanisms (e.g., gated feature fusion, transformer cross-attention) to dynamically weight features from both streams.
+% \end{itemize}
+% Feature importance analysis using SHAP or integrated gradients will be employed to improve model interpretability.
+
+% \textbf{3. Model Benchmarking and Evaluation (May 2026 – Aug 2026)}
+% All multimodal models will be benchmarked against:
+% \begin{itemize}
+% \item \textbf{Traditional radiomics + ML pipelines}, using classifiers such as Random Forest, XGBoost, and SVM.
+% \item \textbf{End-to-end DL-only models}, trained directly on CT volumes.
+% \item \textbf{Multimodal fusion variants}, developed in this project.
+% \end{itemize}
+% Evaluation metrics will include AUC, accuracy, sensitivity, specificity, and calibration (Brier score). Cross-validation will be performed using stratified k-folds, and an independent hold-out set will be used for final evaluation.
+
+% \textbf{4. First Journal Submission: Multimodal Deep Radiomics for RCC Classification (Jun 2026 – Sep 2026)}
+% This paper will report the development, optimisation, and validation of the multimodal fusion models. Results will include detailed comparisons with baseline models and interpretability visualisations. The target journals may include \textit{IEEE Transactions on Medical Imaging}, \textit{Medical Image Analysis}, or \textit{Nature Scientific Reports}.
+
+% \textbf{5. Second Journal Submission: Comparative Study of Deep Learning vs Traditional Radiomics (Oct 2026 – Jan 2027)}
+% The second paper will present a systematic comparison between DL-based models and classical radiomics-based ML pipelines. It will assess reproducibility, generalisability, and clinical interpretability, offering guidelines for future development in renal tumour imaging.
+
+% \textbf{6. External Validation Using Public Datasets (Dec 2026 – Apr 2027)}
+% To ensure generalisability, external validation will be performed using datasets such as TCGA-KIRC (The Cancer Genome Atlas – Kidney Renal Clear Cell Carcinoma) and potentially private institutional datasets, subject to access. Transfer learning and domain adaptation techniques will be applied to test the robustness of the trained models under distributional shift.
+
+% \textbf{7. Thesis Writing and Final Review (Apr 2027 – Sep 2027)}
+% The final six months will be fully dedicated to writing the thesis, consolidating experimental findings, composing all chapters, and responding to internal feedback. Draft versions will be shared progressively with supervisors for feedback. The final thesis will be submitted by September 2027.
+    
+\chapter{Research Plan}\label{chap:progress}
+\section{Future Work Plan}
+
+\begin{figure}[htbp]
+    \centering
+    % 调整宽度以适应页面，可根据需要改为 \textwidth 或 0.9\textwidth
+    \includegraphics[width=\textwidth]{pictures/PhD_Gantt_Dec2025-Oct2027_v3.png}
+    \caption{Gantt chart of the planned PhD research activities (December 2025 – October 2027). 
+    Research tasks (1–4) address specific research questions (RQs) and conclude by March 2027, 
+    followed by a dedicated thesis-writing phase (April–October 2027). 
+    Key milestones include submissions to \textbf{MICCAI 2026}, \textbf{MIDL/IPMI 2027}, 
+    the \textbf{Interpretability Journal Article}, and \textbf{MICCAI 2027}.}
+    \label{fig:gantt_plan}
+\end{figure}
+
+
+\begin{table}
+\centering
+\caption{Summary of planned research tasks, outputs, and their corresponding research questions (RQs).}
+\begin{tabular}{p{0.8cm} p{4cm} p{3cm} p{4cm} p{2cm}}
+\toprule
+\textsf{Task} & \textsf{Focus / Title} & \textsf{Timeline} & \textsf{Planned Output / Venue} & \textsf{Addressed RQs} \\
+\midrule
+1 & Systematic Comparison of Multimodal Fusion Strategies (Radiomics + CT) & Dec 2025 -- Feb 2026 & MICCAI 2026 (Full paper submission Feb 2026) & RQ1, RQ2 \\
+\addlinespace
+2 & VLM-based Feature Fusion & Feb 2026 -- Jun 2026 & MIDL 2027 or IPMI 2027 & RQ2, RQ3 \\
+\addlinespace
+3 & Metadata Integration and Comprehensive Benchmarking & Jun 2026 -- Dec 2026 & MICCAI 2027 (Submission Mar 2027) & RQ3 \\
+\addlinespace
+4 & Interpretability and Expert Evaluation & Dec 2026 -- Mar 2027 & Journal submission on model interpretability & RQ4 \\
+\addlinespace
+5 & Thesis Writing and Submission & Mar 2027 -- Oct 2027 & PhD Thesis &  \\
+\bottomrule
+\end{tabular}
+\label{tab:research_plan}
+\end{table}
+
+The forthcoming research period, from December 2025 to October 2027, will concentrate on advancing multimodal fusion and interpretability methods for 3D CT-based renal tumour classification. A visual summary of the timeline and planned milestones is shown in Figure~\ref{fig:gantt_plan}.
+The external validation dataset (TCIA–KIRC) is already available and will be consistently used to ensure
+reproducibility and generalisability. Since the adaptation of the 2D fusion framework to 3D CT has been completed, the remaining work focuses on comparing fusion strategies, developing advanced vision–language and metadata-based fusion models, and performing interpretability studies. All experimental work will conclude by March 2027, reserving April – October 2027 exclusively for thesis writing. A summary of the planned research tasks, their expected outputs, and the corresponding research questions is presented in Table~\ref{tab:research_plan}.
+
+
+
+\textbf{1. Systematic Comparison of Multimodal Fusion Strategies (Radiomics + CT) (December 2025 – February 2026)}\\
+This phase will perform a comprehensive comparison of multimodal fusion architectures combining radiomics and deep CT representations. 
+Several paradigms, including early, attention-based intermediate, and late fusion, will be evaluated using the KiTS23 dataset and externally validated on TCIA–KIRC. 
+Model architectures will be standardised with consistent training protocols to ensure comparability, and statistical significance testing (e.g., paired t-tests, DeLong’s test) will be applied to evaluate performance differences across fusion methods. 
+Quantitative performance will be measured using metrics such as AUC, accuracy, sensitivity, specificity, and cross-dataset generalisability, while calibration and uncertainty estimation will also be examined to assess model reliability. 
+The findings will be prepared for submission to \textbf{MICCAI 2026} (full paper deadline February 2026; conference October 2026), representing the first major dissemination of the multimodal framework results. 
+
+This task directly addresses RQ1 and RQ2 by identifying optimal multimodal fusion strategies that most effectively combine radiomic and deep visual representations for renal tumour classification.\\[1em]
+
+\textbf{2. VLM-based Feature Fusion (February 2026 – June 2026)}\\
+Building on the comparative analysis, this task will investigate advanced VLM-based multimodal fusion. Radiomic features will be converted into descriptive textual prompts capturing tumour morphology, intensity, and heterogeneity, and these will be co-encoded with volumetric CT data using pretrained medical VLMs such as BioMedCLIP and MedCLIP. Further experiments will examine the effects of prompt engineering and fine-tuning strategies on cross-modal representation learning. The performance of VLM-driven fusion will be benchmarked against conventional numerical fusion, supported by quantitative and qualitative evaluations to assess interpretability and clinical coherence. The resulting work is intended for submission to \textbf{MIDL 2027} or \textbf{IPMI 2027}. 
+
+This task directly addresses RQ2 and RQ3 by developing semantically aligned multimodal representations that improve model robustness and interpretability across imaging modalities.
+
+
+\textbf{3. Metadata Integration and Comprehensive Benchmarking (June 2026 – December 2026)}\\
+This stage will incorporate patient metadata into the multimodal fusion framework to enrich contextual understanding and improve predictive performance. Different integration strategies will be examined. In one approach, metadata will be embedded using tabular encoders and fused with the joint radiomic–CT representation via concatenation or attention-based mechanisms. Alternatively, selected metadata variables will be converted into natural-language descriptions (e.g., “a 65-year-old male patient with a left-sided tumour”) and injected into the vision–language fusion pipeline to evaluate whether semantically aligned metadata improves interpretability and decision consistency. Cross-validation and ablation studies will quantify the individual contribution of each information source.
+
+Benchmarking will compare five model classes: a radiomics-only ML baseline; a CT-only DL model; a radiomics–CT fusion model; a VLM-based multimodal fusion framework; and a tri-modal system integrating radiomics, CT imaging, and patient metadata. This comprehensive comparison will provide insights into the relative advantages of classical, unimodal, and multimodal approaches. Results will be prepared for a \textbf{MICCAI 2027} submission (estimated deadline March 2027; conference October 2027), forming a key milestone for the multimodal learning component of the project. 
+
+This task directly addresses RQ3 by assessing how the inclusion and semantic encoding of metadata enhance model accuracy, contextual understanding, and generalisability within a unified benchmarking framework.
+
+\textbf{4. Interpretability and Expert Evaluation (December 2026 – March 2027)}\\
+Before thesis writing commences, the interpretability of the best-performing multimodal models will be rigorously examined. 
+Rather than relying primarily on post-hoc explanation tools, interpretability will be achieved by visualising the contribution and influence of radiomic and metadata features within the decision-making process. 
+Feature attribution will be evaluated intrinsically through the model’s fusion attention maps, weighting coefficients, and latent-space activations that reflect the importance of different modalities. 
+For metadata-augmented and VLM-based models, visualisation will focus on how contextual variables or textual descriptions guide the final predictions. 
+Representative cases will be qualitatively assessed by expert radiologists to evaluate the clinical plausibility of the model’s reasoning and the correspondence between salient features and radiological criteria. 
+The outcomes of this phase will form the basis of a journal submission dedicated to interpretable and clinically transparent multimodal AI for renal imaging. 
+
+This task directly addresses RQ4 by investigating the intrinsic interpretability of multimodal fusion models and validating whether the identified radiomics and metadata contributions align with expert radiological reasoning.
+
+\textbf{5. Thesis Writing (March 2027 – October 2027)}\\
+The final six months will be dedicated to thesis preparation and submission. All experimental findings, benchmarking results, and interpretability analyses will be synthesised into a cohesive dissertation. Writing efforts will focus on integrating the theoretical framework, methodological developments, and empirical evidence into a unified narrative, with supervisory feedback and internal review used to refine clarity, structure, and academic quality. This phase consolidates the outcomes of RQ1–RQ4 into a coherent doctoral thesis that articulates the theoretical and methodological contributions of the project.
+
+
+
+
+
+% \section{Modules Undertaken}
+
+% The 35 ECTS credits completed include: COMP50060 (ML-Labs Boot Camp, 10 ECTS), EEEN40660 (Experimental Design and Statistics, 5 ECTS), COMP47980 (Generative AI: Language Models, 5 ECTS), COMP47590 (Advanced Machine Learning, 5 ECTS), and COMP50080 (ML-Labs Summer School, 2024 and 2025, 5 ECTS each).
+
+\section{Future Vision: Towards Immersive and Interpretable Clinical AI}
+
+
+If RQs 1–4 are successfully addressed, this PhD will deliver a reproducible and interpretable multimodal AI framework for renal tumour analysis. Beyond improving algorithmic performance, the broader ambition of this work is to reshape how clinicians perceive, interact with, and understand complex medical data.
+
+Immersive technologies such as virtual reality (VR) represent a natural extension of multimodal AI. By transforming volumetric CT data and radiomics-informed segmentations into interactive 3D representations, VR can offer clinicians an intuitive spatial understanding of tumour morphology and its anatomical context~\cite{VRMed}. Moving from conventional 2D slices to immersive 3D exploration can enhance surgical planning, education, and multidisciplinary collaboration, effectively bridging quantitative AI predictions with human spatial reasoning.
+
+The interpretability agenda of this thesis, linking radiomics features, deep representations, and patient metadata, aligns closely with such immersive environments. VR platforms could dynamically highlight radiomic signatures, visualise texture heterogeneity, and display AI explanations directly within the 3D tumour model. This would allow clinicians not only to observe tumour structure but also to understand the rationale behind AI-driven classifications in real time.
+
+Achieving the RQs will therefore provide the technical and conceptual foundation for an immersive clinical AI system. A subsequent postdoctoral programme could integrate the developed multimodal models into VR interfaces, enabling interactive interpretability and shifting the contribution of this research from analytical modelling to experiential clinical insight.
+
+In essence, this work lays the groundwork for a future in which multimodal AI and VR coexist within a unified clinical interface. Such an environment could transform decision-making, medical training, and patient communication by allowing human expertise and machine intelligence to converge in the same immersive space.
+
+
+
+
+
+
+
+
+											
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusion}
+% This report has presented the current progress and future directions of a PhD project dedicated to texture analysis of renal tumours through the integration of radiomics and DL. The initial phase involved a systematic review that confirmed the feasibility of DL approaches in tumour classification and identified key gaps, particularly in the comparison and integration of DL with traditional radiomics-based ML methods.
+
+% To address these challenges, a multimodal framework was constructed and validated using 2D ultrasound data for gestational age prediction, providing a technical proof of concept. The future work will focus on adapting this framework to 3D CT imaging, using the KiTS dataset for renal tumour subtype classification. The research plan includes the development of novel fusion techniques to combine radiomics and DL features, benchmarking with established ML and DL baselines, and validation on external datasets such as TCGA-KIRC.
+
+% The outcomes of this work are expected to result in two peer-reviewed journal publications and a final doctoral thesis. Overall, the project aims to make a significant contribution to the field of medical image analysis by enhancing model accuracy, interpretability, and clinical applicability in renal tumour diagnosis.
+
+% \section*{Conclusion}
+
+% \section*{Conclusion}
+
+This report summarises the completed progress and outlines the remaining trajectory of a PhD project dedicated to advancing multimodal AI for renal tumour analysis. Through an extensive literature review and systematic evaluation, the research confirmed the promise of DL for medical texture analysis while identifying key shortcomings, particularly the underuse of DL in this domain and the absence of systematic fusion frameworks combining radiomics with deep features.
+
+To address these challenges, a feature fusion framework was proposed and validated on a 2D task, demonstrating the feasibility and interpretability advantages of integrating handcrafted and learned representations. This early validation provided a robust foundation for its extension to 3D CT-based renal tumour classification.
+
+The forthcoming research will expand this framework to large-scale volumetric datasets (KiTS23 and TCGA–KIRC), conduct benchmarking across radiomics-only, CT-only, and multimodal fusion models, and incorporate metadata using both tabular and language-based encodings. Vision–language models will be explored for cross-modal integration, leveraging their capability to translate radiomic features into semantic descriptions that align with radiological reasoning. Interpretability will be achieved through the visualisation of radiomic and metadata contributions, enabling direct clinical insights rather than relying solely on post hoc explanation tools.
+
+This project contributes to bridging the methodological and translational gaps in medical AI by developing a reproducible, interpretable, and clinically relevant multimodal framework for renal tumour classification. With a clearly defined research roadmap, validated methodology, and ongoing dissemination through peer-reviewed venues, the project is positioned to deliver meaningful academic and clinical impact in the field of AI-assisted oncology.
+
+My confidence in completing this research is grounded in prior academic and practical experience. I hold a master's degree with three years of research in computer vision. I ranked first in the ML-Labs Bootcamp, attended three competitive AI summer schools, and was the only UCD computer science student selected for the UNA Europa Challenge 2025. I also published in the best conference in my field. These experiences have strengthened my technical capabilities and interdisciplinary outlook, ensuring that I am well-prepared to complete this research successfully.
+
+\singlespacing
+
+\bibliographystyle{unsrt}
+\bibliography{references.bib}
+
+\end{document}
