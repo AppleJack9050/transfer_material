@@ -1,13 +1,13 @@
 ---
 name: transfer_material
-description: The Transfer Research Report is a mini-thesis that demonstrates a PhD student’s research progress and readiness to transfer to full PhD status. It should show understanding of the literature, a clearly defined research problem, completed research work, and a clear plan for future research.
+description: "The Transfer Research Report is a mini-thesis that demonstrates a PhD student’s research progress and readiness to transfer to full PhD status. It should evidence understanding of the literature, a clearly defined research problem, substantive completed work, and a clear plan for the remaining PhD."
 ---
 
-# Transfer Research Report Requirements
+# Transfer Research Report — Requirements
 
-## Title Page Requirements
+## 1) Title Page
 
-The title page of the report must include the following information:
+The title page **must** include:
 
 - Student name and student number
 - Names of supervisors
@@ -15,52 +15,109 @@ The title page of the report must include the following information:
 - PhD start date
 - Date of the most recent RSP
 
-You could refer this part from [metainfo.json] in assets.
+**Source:** Use assets/[metainfo.json] to populate these fields.
 
-## Supporting Documents
+---
 
-The student must also attach any other relevant documents related to the PhD project, including but not limited to:
+## 2) Supporting Documents (Appendices / Attachments)
 
-- Ethical approval forms (if applicable)  
-- Publications (published, under review, or in preparation)  You can refer this part from [paper_list.csv] in assets.
+Attach any other relevant documents related to the PhD project, including (but not limited to):
 
-## Content Requirements
+- Ethical approval forms (if applicable)
+- Publications (published, under review, or in preparation)
 
-The transfer report should demonstrate that the student:
+**Source:** Use assets/[paper_list.csv] to compile the publications list and supporting materials.
 
-- Has conducted a thorough review of the relevant literature  
-- Has clearly identified a PhD research problem  
-- Has completed substantive work towards addressing the research problem  
-- Has prepared a well-defined research plan going forward  
+---
 
-The transfer report can be considered a **mini-dissertation** and may be structured accordingly. It should typically include:
+## 3) Content Expectations
 
-- Background to the research problem
-- An extensive literature review
-- Research contributions and results to date
-- Review of current achievements  
-- A detailed research plan going forward  
+The transfer report must demonstrate that the student:
 
-The report should clearly highlight research progress and must include a list of publications:
+- Has conducted a thorough review of relevant literature
+- Has clearly identified a PhD research problem
+- Has completed substantive work toward addressing the research problem
+- Has prepared a well-defined research plan going forward
 
-- Published  
-- Under review  
-- In preparation  
+The report may be treated as a **mini-dissertation** and structured accordingly.
 
-Tips: 
-1. Only first-author research is included, with particular emphasis on work highly related to glacier studies.
-2. You could refer the template from [UCDThesis.tex] in the assets.
-3. About Research contributions and results to date and Review of current achievements part, you could refer to my listing paper in the assets, including [CISP_BMEI_2024_SLAM.pdf], [AICS2025_Sicheng.pdf], [CISP_BMEI_2025_Sicheng.pdf] [iemss2026_Glacier_3D_Sicheng.pdf], [2026Elsevier_Sicheng.pdf].
-4. About A detailed research plan going forward part, you could refer to my research plan [research_plan.md].
+---
 
-## Length Requirements
+## 4) Recommended Structure
 
-- Recommended length: **20–30 pages**  
-- Maximum length: **30 pages**, excluding references
+A typical transfer report should include:
 
-## Formatting and Layout Requirements
+1. **Background / Context**
+2. **Extensive Literature Review**
+3. **Research Problem Definition**
+4. **Research Contributions and Results to Date**
+5. **Review of Current Achievements**
+6. **Detailed Research Plan Going Forward**
+7. **Publications List**
+8. **References**
+9. **Appendices** (supporting documents)
 
-The report must follow the page layout of a PhD thesis.
-The output format must be latex and it must be written on harddrive.
+---
 
-You could refer the structure from [PhD_Transfer_Liang.pdf] and [PhD_Transfer_Liang.tex] in the assets.
+## 5) Publications List Rules
+
+The report must include a publications list grouped as:
+
+- **Published**
+- **Under review**
+- **In preparation**
+
+**Inclusion criteria (important):**
+1. **Include only first-author research.**
+2. Place **particular emphasis** on work highly related to **glacier studies**.
+
+---
+
+## 6) Required Inputs / References (Assets)
+
+Use the following assets as authoritative sources:
+
+- **Template / formatting guidance**
+  - assets/[UCDThesis.tex] (thesis-style layout baseline)
+
+- **Structure reference**
+  - assets/[PhD_Transfer_Liang.pdf]
+  - assets/[PhD_Transfer_Liang.tex]
+
+- **Progress / achievements content sources** (for “Contributions/Results” and “Achievements” sections)
+  - assets/[CISP_BMEI_2024_SLAM.pdf]
+  - assets/[AICS2025_Sicheng.pdf]
+  - assets/[CISP_BMEI_2025_Sicheng.pdf]
+  - assets/[iemss2026_Glacier_3D_Sicheng.pdf]
+  - assets/[2026Elsevier_Sicheng.pdf]
+
+- **Future work / plan source**
+  - references/[research_plan.md]
+
+---
+
+## 7) Length Requirements
+
+- Recommended length: **20–30 pages**
+- Maximum length: **30 pages** (excluding references)
+
+---
+
+## 8) Formatting and Output Requirements
+
+- The report must follow the **page layout of a PhD thesis** (consistent margins, typography, headings, numbering).
+- **Output format must be LaTeX.**
+- The LaTeX project (including `.tex`, bibliography, and any included figures/tables) must be **written to the hard drive**.
+
+---
+
+## 9) Notes
+
+- Ensure the report clearly highlights research progress, links results to the stated research problem, and justifies the proposed plan.
+- Keep claims supported by citations and/or evidence in the listed publications and documents.
+
+## 10) Importance
+
+- This is professional and academic mini-thesis. Please don't add too much bullet point.
+- At least 25 pages.
+- Put more content on **Research Contributions and Results to Date**, **Review of Current Achievements**.

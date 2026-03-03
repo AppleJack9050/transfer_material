@@ -1,6 +1,4 @@
 # Research Plan (PhD-level, Technical)
-**Title:** Efficient and User-Friendly Generation of Building-Focused 3D Geospatial Models for Scalable Geographic Analysis
-
 ---
 
 ## 1. Background and Motivation (GIScience Framing)
@@ -16,26 +14,29 @@ In geographic production settings, the reconstruction system is not judged prima
 
 ## 2. Research Aim
 
-To design, implement, and validate an **efficient, lightweight, and operational 3D geospatial reconstruction framework** that automatically produces **georeferenced, building-focused 3D models** suitable for scalable GIS-based analysis, while reducing computational cost and minimizing manual operation.
+The aim of this research is to **design, implement, and systematically evaluate a 3D geospatial reconstruction pipeline** that enables **computationally efficient, scalable, and operationally autonomous processing**, while **preserving the geometric accuracy, precision, and spatial consistency required for GIS-grade downstream analysis** across heterogeneous geographic scenes.
 
 ---
 
-## 3. Research Questions and Hypotheses
+## 3. Research Questions
 
-### RQ1 — Efficiency and Scalability
-**How can reconstruction runtime, memory footprint, and storage be reduced while maintaining the geometric fidelity required for geographic analysis?**
+**Primary Research Question (PRQ).**  
+How can a 3D geospatial reconstruction **pipeline** be architected to achieve **computational efficiency**, **scalable processing**, and **operational autonomy**, while producing 3D products that are **fit-for-purpose for downstream GIS analysis** across heterogeneous geographic scenes?
 
-- **H1:** Spatially adaptive representations (e.g., hierarchical grids / multi-resolution tiling) yield sub-linear scaling of compute with mapped area while preserving target geometric tolerances.
+---
 
-### RQ2 — Operational Robustness and Usability
-**How can the reconstruction workflow be automated to reduce parameter sensitivity and manual intervention across heterogeneous geographic scenes and acquisition conditions?**
+### RQ1 — Efficiency  
+How can reconstruction runtime, memory consumption, and storage requirements be minimized while preserving the geometric fidelity and precision necessary for GIS-grade spatial analysis?
 
-- **H2:** Automated self-configuration (data-driven parameter selection, quality gates, and failure detection) reduces operator time and improves reproducibility without degrading accuracy.
+---
 
-### RQ3 — Geospatial Integrity
-**How can the framework guarantee CRS-consistent outputs and preserve metric validity for downstream GIS operations?**
+### RQ2 — Scalability  
+How can the framework scale with increasing mapped extent, data volume, and scene heterogeneity while maintaining stable throughput and consistent geometric quality?
 
-- **H3:** Explicit georeferencing constraints (camera pose priors, control constraints, and/or spatial alignment stages) reduce drift and improve absolute positional reliability relative to unconstrained reconstruction.
+---
+
+### RQ3 — Operational Autonomy  
+How can the reconstruction workflow be designed to require minimal manual **parameter specification and hyperparameter tuning**, while maintaining reliable performance across diverse scenes?
 
 ---
 
