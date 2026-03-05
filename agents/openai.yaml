@@ -1,5 +1,5 @@
 interface:
-  display_name: "transfer_material"
+  display_name: "transfer_methology"
   short_description: "for my phd's stage transfer to generate latex code"
 
 policy:

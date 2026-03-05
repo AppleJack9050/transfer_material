@@ -1,0 +1,423 @@
+\chapter{Methodology and Results}\label{chap:field}
+
+\section{Introduction}\label{sec:method_intro}
+This chapter presents the methodological progress made to date, focusing primarily on evaluating whether DL can feasibly perform texture-based tumour classification, thereby addressing RQ1. Section~\ref{Sec:texture} establishes a radiomics-only baseline on the KiTS23 dataset, while Section~\ref{Sec:fang} validates the technical feasibility of integrating radiomics with deep features in a lightweight 2D setting. Section~\ref{sec:fusion_models} extends these fusion strategies to 3D CT data, providing further evidence for RQ1 and laying essential groundwork for RQ2 by exploring how different fusion mechanisms may influence model performance. These studies collectively form the empirical basis for the more advanced multimodal fusion investigations planned in subsequent work.
+
+\section{Renal Cell Carcinoma Texture Analysis with KiTS23 Dataset \textcolor{blue}{\uline{(under review as a journal article)}}}\label{Sec:texture}
+To address RQ1, “How can radiomics and DL representations be effectively integrated to improve texture-based classification performance across medical imaging modalities?”, an appropriate dataset is selected to perform texture analysis using a combination of traditional ML and radiomics features. The results of this approach serve as a benchmark for subsequent comparisons with DL and feature fusion methods.
+
+\subsection{Dataset}\label{subsec:summative_methodology}
+The KiTS23 dataset is part of the Kidney Tumour Segmentation Challenge 2023~\cite{kitsIntro}. The detail of the dataset is introduced in section~\ref{Sec:dataset}.
+% The dataset is specifically designed to aid in the automatic segmentation of kidney tumours and surrounding structures from CT scans, supporting the development of tools for more accurate and efficient diagnosis and treatment planning for renal cancer. The KiTS23 training set with $488$ cases has been used for radiomics feature extraction in this study.
+
+% The dataset consists of preoperative contrast-enhanced abdominal CT scans from patients who underwent partial or radical nephrectomy for kidney tumours. It includes imaging data from a diverse range of clinical settings, capturing a wide variety of tumour sizes, shapes, and stages, along with different kidney and anatomical variations. Each image is accompanied by ground-truth annotations that are meticulously curated to facilitate robust training and evaluation of segmentation algorithms.
+
+% The labelling strategy used in KiTS23 is of paramount importance, as it ensures that the dataset can be effectively used for developing and benchmarking DL models. Each CT scan is manually segmented by trained experts, following a structured protocol to delineate the kidney, tumour, and cysts (if present). This multi-class segmentation approach ensures that models can be trained not only to identify tumours but also to segment other key renal structures, which is crucial for comprehensive surgical planning. Furthermore, the annotations are voxel-wise, meaning that each voxel (3D pixel) of the image is labelled, allowing for very fine-grained analysis.
+
+% This rigorous labelling strategy enables the development of ML models that can accurately segment not only the tumour but also distinguish it from other structures, improving the utility of these models in clinical decision-making.
+
+% Additionally, the KiTS23 dataset includes patient metadata such as clinical outcomes, demographics, tumour subtypes, and surgical details, which allows for more comprehensive analyses, such as tumour classsification, predicting prognosis or treatment outcomes based on tumour morphology and segmentation.
+
+\subsection{Results}
+\label{sec:analysis}
+
+This section presents the ML models integrated with RFE used for statistical analysis in this study and provides a comparative summary of their performance. The objective of the statistical analysis is to distinguish between ccRCC and other types of renal tumours. In the dataset, the number of ccRCC cases and other types of tumours is balanced, with an approximate ratio of $6.5$:$3.5$.
+% Figure~\ref{fig:subtype} illustrates the distribution of tumour types within the dataset, showing that the number of ccRCC cases exceeds that of other tumour types. However, overall, the dataset maintains a balance between ccRCC and other tumours.
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.6\textwidth]{Figures/subtype dis.png}
+%   }
+%   \caption{Distribution of tumour types within the dataset.} 
+%   \label{fig:subtype}
+% \end{figure*}
+
+The ML models employed for classification include Random Forest, Support Vector Classifer (SVC), Gradient Boosting, and Logistic Regression. Among the four models, the Logistic Regression exhibited significantly better performance compared to the other three models. Specific comparisons of their performances are detailed in the evaluation subsection. 
+
+% \subsection{Model Training}
+
+% The four models, Random Forest, SVC, Gradient Boosting, and Logistic Regression, were each combined with both LASSO feature selection and RFE feature selection. Comparative analysis of their performance indicates that RFE consistently outperforms LASSO across all four models. During the training phase, a five-fold cross-validated grid search was employed for each model to approximate the optimal parameters. Notably, in the SVC model, a linear kernel was employed instead of a nonlinear kernel, as comparisons of their performances suggest that the dataset is linearly separable. 
+
+\subsubsection{Quantitative Evaluation}
+
+% \begin{figure*}[htb]
+%   \centering
+%   \subfloat[SVC]{
+%   \includegraphics[height=0.32\textwidth]{Figures/lr curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/svc curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/rf curve.png}
+%   }
+%   \subfloat[Logistic Regression]{
+%   \includegraphics[height=0.32\textwidth]{Figures/gbc curve.png}
+%   }
+%   \caption{Performance plots during the RFE feature selection process. Plot (a) is for the SVC model, (b) is for the Logistic Regression model. five evaluation metrics were utilised: accuracy, area under the curve (AUC), precision, sensitivity, and specificity.} 
+%   \label{fig:plot}
+% \end{figure*}
+
+% \begin{figure*}[htb]
+%  \centering
+%   {
+%   \includegraphics[height=0.64\textwidth]{pictures/Figure_3.png}
+%   }
+%   \caption{Performance plots during the RFE feature selection process. Plot (a) is for the SVC model, (b) is for the Logistic Regression model, (c) is for the Random Forest model, and (d) is for the Gradient Boosting Classifier model. Five evaluation metrics were utilised: accuracy, area under the curve (AUC), precision, sensitivity, and specificity.} 
+%   \label{fig:plot}
+% \end{figure*}
+
+
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.5\textwidth]{pictures/sen spe.png}
+%   }
+%   \caption{Sensitivity and specificity curve for four models with the optimal number of features. The specificity curve is unified due to different thresholds for four models.} 
+%   \label{fig:ssc}
+% \end{figure*}
+
+% \begin{figure*}[htb]
+%   \centering
+%   \caption{Evaluation scores of the classification for the four benchmarking methods: Random Forest, SVC, Gradient Boosting, and Logistic Regression.} 
+%   {
+%   \includegraphics[height=0.5\textwidth]{pictures/table.png}
+%   }
+  
+%   \label{fig:table}
+% \end{figure*}
+
+\begin{table}[htb]
+\centering
+\captionsetup{justification=centering}  % 标题居中
+\caption{Evaluation scores of the classification for the four benchmarking methods: Random Forest, SVC, Gradient Boosting, and Logistic Regression}
+\label{table:1}
+\small
+\begin{tabular}{@{}lcccc@{}}  % @{}移除列前后的空格
+\toprule
+\textsf{Metric (\%)} & \textsf{Random Forest} & \textsf{SVC} & \textsf{Gradient Boosting} & \textsf{Logistic Regression} \\
+\midrule
+Accuracy           & $74.1 \pm 2.45$ & $71.2 \pm 2.65$ & $70.0 \pm 3.8$ & $\textbf{75.1} \pm 4.4$ \\
+AUC                & $77.9 \pm 4.85$ & $77.5 \pm 3.65$ & $73.8 \pm 6.1$ & $\textbf{79.6} \pm 5.0$ \\
+Precision          & $78.0 \pm 3.9$ & $74.2 \pm 2.5$ & $74.2 \pm 3.0$ & $\textbf{78.1} \pm 3.0$ \\
+Sensitivity        & $83.9 \pm 3.85$ & $84.6 \pm 3.95$ & $81.8 \pm 2.5$ & $\textbf{85.0} \pm 5.3$ \\
+Specificity        & $56.7 \pm 10.95$ & $47.1 \pm 8.35$ & $49.0 \pm 7.7$ & $\textbf{57.3} \pm 6.8$ \\
+\midrule
+Number of Features & 14   & 10   & 16   & 41 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In this study, five evaluation metrics were utilised: accuracy, Area Under the Curve (AUC), precision, sensitivity, and specificity. The $0.95$ confidence intervals for each metric of every model were also calculated, and all performance metrics were obtained using five-fold cross-validation. During the recursive feature elimination (RFE) process, model performance was tracked as the number of selected features varied. The SVC model achieved its highest AUC when RFE retained only $10$ features, whereas the Logistic Regression model reached its peak AUC with a broader set of $41$ features. Please refer to Table~\ref{table:1} for the number of features corresponding to the optimal AUC for each model, together with their performance across the other evaluation metrics.
+
+% \begin{figure*}[htb]
+%   \centering
+%   {
+%   \includegraphics[height=0.48\textwidth]{pictures/Figure_4.png}
+%   }
+%   \caption{ROC curve for four models with the optimal number of features.} 
+%   \label{fig:roc}
+% \end{figure*}
+A comparison of model performances in Table~\ref{table:1} clearly shows that the Logistic Regression classifier excels in identifying clear cell renal cell carcinoma (ccRCC), achieving the highest scores across all five metrics, with an AUC of $0.796$. 
+% Figure~\ref{fig:roc} displays the ROC curves for all four models when the optimal number of features was selected through the feature selection process. A higher AUC indicates that the model exhibits a high level of robustness.
+
+
+% Figure~\ref{fig:ssc} shows the sensitivity and specificity curve for all four models when the optimal features are selected for training. The intersection of curves at the $0.6$ threshold represents an optimal balance point for the trade-off between sensitivity and specificity, which is crucial for clinical diagnostic tasks where high sensitivity is particularly important.
+
+
+
+
+\section{Fusing Radiomics Features with Deep Representations for Gestational Age Estimation in Fetal Ultrasound Images \textcolor{blue}{\uline{(Accepted at MICCAI 2025)}}}\label{Sec:fang}
+
+To address RQ1, which concerns the integration of radiomics and DL representations for improved texture-based classification, an initial feasibility study was conducted on gestational age (GA) estimation using lightweight 2D fetal ultrasound images. This provided a controlled setting for evaluating fusion strategies before extending the methodology to 3D CT-based renal tumour analysis.
+
+This work introduces a feature-fusion framework that integrates radiomics features with CNN-derived deep representations of the fetal head to improve GA prediction. Two fetal ultrasound datasets were used to assess the approach, and both ML and DL baselines were included for comparison. The main contributions are: (i) proposing the first framework that fuses radiomics and ultrasound images for GA estimation; (ii) introducing a plug-and-play cross-attention module for effective fusion of radiomics and deep features; and (iii) demonstrating, through comprehensive experiments, the superiority of the fusion module over unimodal ML and DL models.
+
+\subsection{Datasets}
+Two publicly available datasets were employed in this study. The Spanish trans-thalamic dataset (ES-TT) originates from two centres in Spain \cite{Xavier:2020}, while the HC18 dataset was sourced from a database in the Netherlands \cite{Heuvel:2018_b}. All scans were acquired from healthy singleton pregnancies. The HC18 data were collected using two ultrasound machines at a single centre, whereas ES-TT data were obtained from six machines across two different centres. Owing to the variability of the fetal head morphology across different pregnancy trimesters, an additional challenge arises in the estimation of GA. The two datasets were combined and partitioned in a 70:30 ratio for training and testing. From the test set, a subset of 100 images was randomly selected for validation purposes.
+\subsection{Methodology}
+
+An overview of the fusion framework is shown in Fig.~\ref{fusion_network}. It consists of three key components: (1) a pre-trained ConvNeXt network~\cite{Liu:2022} for learning deep representations; (2) a Python-based pipeline for radiomics feature extraction; and (3) a cross-attention module that fuses radiomics and deep features for GA prediction.
+
+
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{pictures/fusion_network.drawio.png}
+\caption{Proposed fusion framework for GA estimation from fetal ultrasound images. \textit{Blue}: Trainable (DL model, cross-attention, MLP). \textit{Gray}: Non-trainable (Radiomics)}\label{fusion_network}
+\end{figure}
+
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=\textwidth]{pictures/modules.drawio.png}
+% \caption{Visualisation of CNBlock and Cross-attention module. \textbf{(a)} is an example of CNBlock with channel size 96; \textbf{(b)} represents the cross-attention module for integrating radiomics features and deep representations. LN: Layer Normalization} \label{modules}
+% \end{figure}
+
+
+
+The proposed framework employs the CNN topology to construct the DL model to learn deep representations that reflect high-level semantic information of ultrasound images. Specifically, the study incorporate models ResNet18 \cite{resnet}, SwinTransformer \cite{Liu:2022b}, EfficientNet V2 \cite{Tan:2021}, MobileNet V3 \cite{Howard:2019}, ViT \cite{Dosovitskiy:2020_b}, MaxViT \cite{Tu:2022}, and ConvNeXt \cite{Liu:2022} for their proven effectiveness in image classification tasks. %The technical details of these DL architectures are documented in prior research \cite{He:2016,Howard:2019,Dosovitskiy:2020_b,Tan:2021,Liu:2022b,Tu:2022,Liu:2022}. 
+The DL model in the proposed framework adopts the ConvNeXt stack architecture. Features are passed to a cross-attention module to perform a fusion operation. 
+% with four layers. Each layer consists of a CNBlock followed by a convolution layer. The CNBlock layers have channel size of 96, 192, 384, and 768, respectively. The detailed illustration of the CNBlock structure is shown in Fig.~\ref{modules}(a).
+
+% \hl{COMMENT: superscript dimensions for X is not very consistent. Maybe drop and instead say $X\in\mathbb{R}^{3\times n_h\times n_w}$. Keep consistent notation for all dimensions, maybe something like lowercase italic $n_{whatever}$. So when you encounter $n$ with subscript you know that it is a dimension of some kind. A}
+
+% The fetal ultrasound image $X_\text{US}\in\mathbb{R}^{3\times n_\text{h}\times n_\text{w}}$ is processed by the model $f_{\theta}$, producing a deep representation vector that is subsequently fed to the $\ReLU$ activation and linearly combined to output $\bm{x}_\text{DL}\in\mathbb{R}^{256}$, as follows:
+% \begin{align}
+% \label{deepmodel_eq}
+% \bm{x}_\text{DL} & = W_{\text{DL}} \cdot f_{\theta}(X_\text{US}) + b_{\text{DL}}
+% \end{align}
+% The input ultrasound data $X_\text{US}$ has dimensions of $3 \times n_\text{h} \times n_\text{w}$, where $n_\text{h}$ and $n_\text{w}$ represent the height and width of the image, respectively.
+% Subsequently, $\bm{x}_\text{DL}$ is fused with radiomics features $\bar{\bm x}_{\text{RAD}}$ within the cross-attention module.
+
+% \subsubsection{Radiomics Features}
+
+
+% % \hl{COMMENT: in order to get rid of the ugly superscript, how about calling $X_\text{US}$ the $3\times n_h\times n_w$ input and $X_\text{ROI}$. Just provide dimensions in text.}
+
+% Our dataset comprises fetal head ultrasound images and corresponding region of interest (ROI) masks, denoted as $X_\text{US}$ and $X_\text{ROI}$, respectively.
+% The input $X_\text{ROI}$ has dimensions of $1 \times n_\text{h} \times n_\text{w}$, where $n_\text{h}$ and $n_\text{w}$ correspond to the height and width of ROI image.
+% The process of extracting radiomics features utilizes each pair of $X_\text{US}$ and $X_\text{ROI}$ as input. In this study, a total of 95 radiomics features $\bm{x}_{\text{RAD}} \in \mathbb{R}^{95}$, which capture surface-level details of the fetal head region, are extracted with the publicly accessible Python package, \verb|pyradiomics|\footnote{https://pyradiomics.re adthedocs.io/en/latest/}. These extracted features are categorized into shape, statistical (first order), and texture features \cite{Fan:2021,Aerts:2014,Griethuysen:2017}.
+
+% The size of features in six categories is 9, 18, 22, 16, 16 and 14. 
+% The radiomics features can be categorized into six groups: shape features (2D), first order features, and texture features consist of gray level co-occurrence matrix (GLCM), gray level run length matrix (GLRLM), gray level size zone matrix (GLSZM), gray level dependence matrix (GLDM) features. Before the feature fusion step, we standardize radiomics features $\bm x_{\text{RAD}} $ by removing the mean and scaling to unit variance to obtain $\bar{\bm x}_{\text{RAD}} \in \mathbb{R}^{95}$. Subsequently, these standardized features $\bar{\bm x}_{\text{RAD}}$ are used as the input to the cross-attention module.
+
+% The standardized features, denoted as $\bar{X_r}$, are derived by subtracting the mean and scaling to unit variance. Subsequently, $\bar{X_r}$ are used as the input to the cross-attention module.
+
+%The standardized features, $\bar{X_r}$, are performed by removing the mean and scaling to unit variance with Python package, sklearn \verb|standardscaler|\footnote{https://scikit-learn.org/stable/}. Then $\bar{X_r}$ serves as the input to the cross-attention module. %The process of extracting radiomics features can be defined as below:
+
+% \begin{equation}\label{pyradiomic}
+% \begin{split}
+% X_r &= PyRadiomics(X^{C \times H \times W}, X^{H \times W}_{roi}) \\
+% \bar{X_r} &= StandardScaler(X_r)
+% \end{split}
+% \end{equation}
+
+% \begin{equation}\label{pyradiomic}
+% \bar{X_r} = \verb|standardscaler|(\verb|pyradiomics|(X^{C \times H \times W}, X^{H \times W}_{roi}))
+% \end{equation}
+% where $\bar{X_r}$ represents the output features after radiomics feature extraction process and serves as the input to the cross-attention module.
+
+
+
+% \subsubsection*{Feature Fusion}
+
+% \hl{TODO: Watch out your notation, should be consistent. scalar italic e.g. $x$, vector bold $\bm x$, matrix upper case $W$ or $\text{W}$ but keep it consistent. I started to modify but need to be completed. Maybe used XA for Cross-attention subscript?}
+% Features are passed to a cross-attention module to perform a fusion operation. 
+% The cross-attention module in the model has an embedding size of $512$ and is linked to a multi-layer perceptron (MLP) module. The MLP module consists of two fully connected layers with a hidden feature size of 512 and the $\ReLU$ activation layer. Firstly, input feature $\bar{\bm x}_{\text{RAD}}$ is linearly projected to queries ${\bm q}=W_\text{Q} \bar{\bm x}_{\text{RAD}} + b_\text{Q}$ $({\bm q} \in \mathbb R^{d_e})$, and feature ${\bm x}_\text{DL}$ is linearly projected to keys ${\bm k}=W_\text{K} {\bm x}_\text{DL} + b_\text{K}$ $({\bm k} \in \mathbb R^{d_e})$, and values ${\bm v}=W_\text{V} {\bm x}_\text{DL} + b_\text{V}$ $({\bm v} \in \mathbb R^{d_e})$. 
+%The projection process can be defined as follows:
+% \begin{equation}
+% \begin{split}
+% Q &= Linear(\bar{X_r}, d\_emb) \\
+% K &= Linear(X_f, d\_emb) \\
+% V &= Linear(X_f, d\_emb) 
+% \end{split}
+% \end{equation}
+% $d_e$ represents the dimension of hidden embeddings. In our framework, $d_e$ is set to 512. Next, the scaled dot-product attention is employed in the cross-attention module. Mathematically, it can be expressed as:
+
+% \begin{equation}
+% X_\text{XA} = \operatorname{softmax}\left(\frac{{\bm q} {\bm k}^{\top}}{\sqrt{d_{\bm k}}}\right) {\bm v} = {A}_\text{XA} {\bm v}
+% \end{equation}
+% where ${A}_\text{XA} \in \mathbb{R}^{d_{\bm q} \times d_{\bm k}}$ is the attention weight matrix, and $d_{\bm k}$ is the feature dimension of ${\bm k}$. The attention score $({\bm q} {\bm k}^{\top} \in \mathbb{R}^{d_{\bm q} \times d_{\bm k}})$ is computed between each query and all keys. Normalization is done across the key dimension to obtain attention weights $\text{A}_\text{XA} = \operatorname{softmax}(\cdot)$.
+% The MLP module processes the cross-attention module's output to predict GA (denoted as $\hat{y} \in \mathbb{R}$) as follows:
+
+% \begin{align}
+% \bm{y}_\text{XA} &= \ReLU( W_\text{XA} \cdot \vecop(X_\text{XA}) + b_\text{XA}\;) \\
+% \hat{y} &= W_\text{MLP} \cdot \bm{y}_\text{XA} + b_\text{MLP}
+% \end{align}
+% where $\vecop(\cdot)$ is the flatten function, and $\bm{y}_\text{XA} \in \mathbb{R}^{512}$ is a feature vector.
+
+% \subsubsection{Model Training and Loss Functions}
+
+% \def\angled#1{{\langle #1 \rangle}}
+
+% We employ a fine-tuning strategy for our framework, initializing the DL models with pre-trained weights from ImageNet \cite{Deng:2009}. We optimize the likelihood of the $\hat{y}$ regression output and therefore use the least squares for the overall training loss: $\mathcal{L} = \sum_{i=1}^M\left(y^\angled{i}-\hat{y}^\angled{i}\right)^2$, 
+% %
+% % \hl{Note: As mentioned, taking $\sqrt$ and dividing by $N$ does not change anything in terms of optimization, just wasting computation resources. Your loss should be the least squares. RMSE is used as performance measure. Also I generally prefer to use $M$ for the cardinality of the training set.} 
+% %
+% % \begin{equation}
+% % % \mathcal{L}(\hat{y},y_i) = \sqrt{MSE(\hat{y},y_{gt})}
+% % % \mathrm{RMSD}=\sqrt{\frac{\sum_{i=1}^N\left(x_i-\hat{x}_i\right)^2}{N}}
+% % \mathcal{L} = \sum_{i=1}^M\left(y^\angled{i}-\hat{y}^\angled{i}\right)^2
+% % \end{equation}
+% where $\hat{y}^\angled{i}$ is the model predicted GA for the $i^\text{th}$ training input and $y^\angled{i}$ is the computed GA as described in Section~\ref{data_desc}. $M$ is the size of the training set. The model with the best performance is selected and saved for testing based on their predictive accuracy during the model training phase.
+
+% \textbf{ML.} In our extensive analysis, we build traditional ML models for predicting GA using radiomics features exclusively. These models include %Linear Regression, 
+% Support Vector Machine (SVM), K-Nearest Neighbors (KNN), Random Forest (RF), AdaBoost, Ridge and Gradient Boosting Regression (GBR). Additionally, we perform feature selection, including recursive feature elimination (REF) and least absolute shrinkage and selection operator (LASSO), to improve the performance of ML models.
+
+
+\subsection{Results}
+
+GA prediction accuracy was evaluated using MAE and RMSE, which were highly correlated ($r > 0.998$); therefore, only MAE is reported. For ML models, the coefficient of determination ($R^2$) was additionally used to assess model fit. As shown in Table~\ref{test_results}, the proposed framework achieved the best performance with an average MAE of 8.0 days. The cross-attention module significantly improved GA estimation compared with both the concatenation module ($p < 0.001$) and the baseline model ($p < 0.001$). Although ResNet18 and EfficientNet V2 showed slightly higher MAE under cross-attention than under concatenation, overall performance across all architectures was still significantly better with cross-attention ($p < 0.001$), demonstrating the advantage of the fusion mechanism.
+
+Table~\ref{ml_models} summarises the performance of radiomics-based ML models. While GBR with RFE achieved the highest $R^2$, its MAE remained substantially higher than that of the proposed framework. Overall, the fusion approach consistently outperformed all ML baselines.
+
+
+\begin{table}[tb]
+\parbox{.51\linewidth}{
+\centering
+\caption{Test results of GA estimation by integrating DL models with concatenation and cross-attention mechanisms are compared. C: Concatenation. XA: Cross-attention.}\label{test_results}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{lcc|c|c}
+\hline
+DL Model & C & XA & MAE $\downarrow$ & P-value\\
+\hline
+ResNet18 & \xmark & \xmark & 9.9 & \\
+EfficientNet V2 & \xmark & \xmark & 9.3 & \multirow{3}{*}{<$10^{-3}$ } \\ % \cite{Wang:2025} 
+MaxViT & \xmark & \xmark & 10.7 & \\
+SwinTransformer & \xmark & \xmark & 9.4 & \\
+ConvNeXt & \xmark & \xmark & 8.6 & \\
+\hline
+ResNet18 & \cmark & \xmark & 10.2 & \\
+EfficientNet V2 & \cmark & \xmark & 8.6 & \multirow{3}{*}{<$10^{-3}$ } \\
+MaxViT & \cmark & \xmark & 9.6 & \\
+SwinTransformer & \cmark & \xmark & 8.6 & \\
+\hline
+ResNet18 & \xmark & \cmark & 10.4 & \multirow{5}{*}{--} \\
+EfficientNet V2 & \xmark & \cmark & 8.6 & \\
+MaxViT & \xmark & \cmark & 8.7 & \\
+SwinTransformer & \xmark & \cmark & 8.3 & \\
+\textbf{ConvNeXt} & \xmark & \cmark & \textbf{8.0} & \\
+\hline
+\end{tabular}
+}
+\hfill
+\parbox{.46\linewidth}{
+\centering
+\caption{Test results of GA estimation using ML models by employing two techniques to select radiomics features. SVM: Support Vector Machine. KNN: K-Nearest Neighbors. RF: Random Forest. GBR: Gradient Boosting Regression.}\label{ml_models}
+
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{l|c|c}
+\hline
+ML Model & MAE $\downarrow$ & $R^2$ $\uparrow$ \\
+\hline
+SVM (LASSO) & 25.2 & 0.62 \\ 
+KNN (LASSO) & 25.2 & 0.61 \\ 
+AdaBoost (LASSO) & 26.8 & 0.60 \\ 
+Ridge (LASSO) & 25.7 & 0.64 \\ 
+RF (LASSO) & 21.7 & 0.69 \\
+GBR (LASSO) & 21.8 & 0.69 \\
+\hline
+SVM (RFE) & 24.9 & 0.62 \\ 
+KNN (RFE) & 24.5 & 0.62 \\ 
+AdaBoost (RFE) & 26.5 & 0.61 \\ 
+Ridge (RFE) & 25.8 & 0.64 \\ 
+RF (RFE) & 21.4 & 0.69 \\
+\textbf{GBR (RFE)} & \textbf{21.3} & \textbf{0.70} \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\textwidth]{pictures/att_weight_vis.drawio.png}
+\caption{Visualisation of attention weights within our framework.} \label{att_weight}
+\end{figure}
+
+\textbf{Attention Weight Visualisation.}  
+Fig.~\ref{att_weight} shows cross-attention maps from representative cases across the three trimesters. The module highlights complementary patterns between radiomics features and deep representations, particularly in the second and third trimesters. In early-trimester data, attention weights emphasise specific radiomics features such as Inverse Difference and Inverse Difference Moment. These visualisations provide an interpretable indication of how individual radiomics features contribute to GA estimation.
+
+\textbf{Ablation Study.}  
+The contributions of fine-tuning, fusion strategy, and cross-attention were assessed through an ablation study. As shown in Table~\ref{ablation}, fine-tuning with pre-trained weights is essential for good performance, reducing MAE from 28.2 to 8.6 days. Simple concatenation offers minimal additional benefit, whereas incorporating cross-attention further improves accuracy to 8.0 days, confirming its importance for effective fusion of deep and radiomics features.
+
+
+
+\begin{table}[tb]
+\centering
+\caption{Ablation study on the different feature fusion modules and pre-trained weights. Concat: Concatenation. XA: Cross-attention.}\label{ablation}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc|c}
+\hline
+Model & Image & Pretrain & Concat & Cross-attention & MAE $\downarrow$ \\
+\hline
+ConvNeXt & \cmark & \xmark & \xmark & \xmark & 28.2 \\
+ConvNeXt & \cmark & \cmark & \xmark & \xmark & 8.6 \\
+ConvNeXt $+$ Concat & \cmark & \cmark  & \cmark & \xmark & 8.7 \\
+\textbf{ConvNeXt $+$ XA (Ours)} & \cmark & \cmark & \xmark & \cmark & \textbf{8.0} \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Conclusion}
+
+This study presents a feature fusion framework that integrates image-based deep representations with radiomics features to estimate fetal GA from ultrasound images. Evaluated on a lightweight dataset and a simple prediction task, the approach enabled rapid prototyping while still achieving strong predictive performance. These results highlight the value of combining handcrafted and learned features. The successful 2D proof of concept provides a methodological basis for extending the fusion strategy to more complex 3D CT-based renal tumour classification, where multimodal feature integration is likely to have even greater impact.
+
+
+
+
+\section{Fusion-Based DL Models for 3D Renal CT Classification}
+\label{sec:fusion_models}
+
+The experiments presented in this section constitute a central component of the investigation and directly address RQ1, which concerns the effective integration of radiomics and DL representations for improved texture-based classification performance across medical imaging modalities. They also resolve a substantial portion of RQ2 and RQ3, which focus on the identification of the most effective feature-fusion strategies for aligning radiomics features with imaging representations, including both conventional numerical fusion and more advanced approaches that will later involve VLMs. The purpose of the present section is to establish a unified and controlled benchmark that compares radiomics-only ML models, image-only DL models, and a series of multimodal fusion architectures under consistent experimental conditions.
+
+
+\subsection{Methods}
+
+The binary classification task remains the distinction between ccRCC and non-ccRCC tumours as defined earlier in section~\ref{Sec:texture}. All experiments were conducted on the KiTS23 dataset, whose multi-centre origin and varied scanner configurations provide substantial heterogeneity that promotes generalisability. The TCGA dataset is currently being prepared for use as an external test set. A three-way split of approximately 60\% training, 25\% validation, and 15\% testing was adopted for all models to ensure consistent evaluation. For the radiomics-only ML models, the training and validation partitions were pooled to create a larger training set while preserving the identical test set used for all modelling paradigms. The details of the KiTS23 dataset are in section~\ref{Sec:dataset}.
+
+A strengthened preprocessing workflow based on MONAI was applied across all experiments~\cite{cardoso2022monai}. Very small tumours and multi-lesion cases were excluded to avoid unstable segmentation boundaries. Multiple expert annotations were fused using STAPLE in order to obtain consensus tumour masks. Each mask was expanded by twelve voxels in all directions and then cropped to produce standardised volumetric regions of interest suitable for 3D convolutional networks. Radiomics features were extracted from both the original and the Laplacian of Gaussian filtered images. Feature selection was then performed in multiple stages to retain only stable and non-redundant radiomics predictors. A sequence of robustness filtering steps, including ICC, MAD, Pearson correlation, and clustering, reduced the initial 386 features to 71 stable descriptors. LASSO was subsequently applied to derive a compact 5-feature subset used for radiomics-only ML. These five features constitute a highly-reduced radiomics subset that was also evaluated in later fusion experiments
+
+The radiomics-only models were trained using the five LASSO-selected features to establish a compact and interpretable baseline that reduces the risk of overfitting while maintaining discriminatory potential. Several classifiers were evaluated, including Logistic Regression, Gradient Boosting, Random Forests, XGBoost, and SVM with an RBF kernel.
+
+The image-only DL baselines were constructed using a 3D ResNet18 architecture. One model was trained from scratch, while the other was initialised with MedicalNet weights. Both models were trained on the cropped 3D regions of interest using weighted cross-entropy to compensate for the slight class imbalance present in KiTS23.
+
+A series of feature fusion models was then developed to integrate radiomics features with the deep embeddings produced by the 3D ResNet18 encoder. Five fusion mechanisms were examined. The first was simple concatenation, which served as an early-fusion baseline. The second and third were two forms of cross-attention, the first using a shared linear transformation for all radiomics features and the second introducing feature index embeddings to preserve structural information. The fourth model employed gated attention in which radiomics and deep representations were adaptively weighted. The fifth model used an SE-like recalibration mechanism that amplified or suppressed radiomics contributions according to the corresponding deep features. All models were trained and evaluated using identical splits, and their final test performance was assessed primarily using the AUC, with specificity reported for contextual interpretation. All results correspond to those presented in Table~\ref{table:perform}.
+
+\begin{table*}[ht]
+\centering
+\caption{Performance of radiomics-only, DL and fusion models. All metrics are reported as percentages. Fusion-65 models combine image features with all 65 radiomics features, while Fusion-3 models fuse image features with the reduced 3-feature subset.}\label{table:perform}
+\begin{tabular}{p{7cm}cccccc}
+\toprule
+Model & AUC & ACC & F1 & Precision & Recall  & Specificity\\
+\midrule
+\multicolumn{7}{l}{\textbf{ML (Radiomics-only)}} \\
+GradientBoosting         & 69.4 & 71.7 & 78.8 & 82.1 & 76.1 & 61.2 \\
+LightGBM                 & 66.8 & 66.8 & 74.1 & 80.7 & 69.0 & 61.3 \\
+LogisticRegression       & 73.5 & 68.9 & 74.8 & 85.3 & 67.0 & 73.2 \\
+RandomForest             & 69.7 & 65.5 & 70.4 & 86.6 & 59.7 & 78.6 \\
+SVM\_RBF                 & 74.4 & 62.0 & 65.6 & \textbf{88.3} & 52.6 & \textbf{83.8} \\
+XGBoost                  & 67.0 & 65.4 & 71.9 & 82.3 & 64.3 & 67.8 \\
+\midrule
+\multicolumn{7}{l}{\textbf{DL}} \\
+3D ResNet18                          & 52.1 & 63.3 & 75.0 & 71.7 & 78.6 & 27.8 \\
+3D ResNet18 (MedicalNet pre-trained) & 71.0 & 61.7 & 72.9 & 72.1 & 73.8 & 33.3 \\
+\midrule
+\multicolumn{7}{l}{\textbf{Fusion-65}} \\
+Concat                              & 74.9 & \textbf{83.3} & \textbf{88.4} & 86.4 & \textbf{90.5} & 66.7 \\
+Cross Attention (shared Linear)     & 56.5 & 58.3 & 67.5 & 74.3 & 61.9 & 50.0 \\
+Cross Attention V2 (with feature embedding) & 70.2 & 65.0 & 71.2 & 83.9 & 61.9 & 72.2 \\
+Gated Attention                     & \textbf{81.2} & 76.7 & 83.3 & 83.3 & 83.3 & 61.1 \\
+SE-like Radiomics Recalibration     & 67.3 & 65.0 & 73.4 & 78.4 & 69.0 & 55.6 \\
+\midrule
+\multicolumn{7}{l}{\textbf{Fusion-3}} \\
+Concat                              & 70.0 & 66.7 & 75.6 & 77.5 & 73.8 & 50.0 \\
+Cross Attention (shared Linear)     & 70.9 & 56.7 & 61.8 & 80.8 & 50.0 & 72.2 \\
+Cross Attention V2 (with feature embedding) & 73.3 & 75.0 & 81.5 & 84.6 & 78.6 & 66.7 \\
+Gated Attention                     & 79.1 & 81.7 & 86.7 & 87.8 & 85.7 & 72.2 \\
+SE-like Radiomics Recalibration     & 68.4 & 63.3 & 73.8 & 73.8 & 73.8 & 38.9 \\
+\midrule
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Results}
+
+The radiomics-only ML models showed that a small number of well-selected features can capture meaningful tumour heterogeneity. SVM achieved the strongest baseline (AUC = 0.744), followed by Logistic Regression (AUC = 0.735), while Gradient Boosting, Random Forest, and XGBoost produced AUCs of 0.668–0.697. Specificity remained stable across models, confirming that the Youden-index thresholding provided balanced sensitivity–specificity trade-offs.
+
+Image-only DL models performed notably worse: 3D ResNet18 achieved AUCs of 0.521 (from scratch) and 0.544 (MedicalNet pretraining), with similarly low specificity. These results indicate that volumetric CNNs struggle to learn discriminative renal texture patterns from moderate-sized datasets, and that pretraining offers only marginal benefit.
+
+Multimodal fusion consistently outperformed both unimodal paradigms. Simple concatenation achieved an AUC of 0.749, surpassing all radiomics-only and image-only baselines. The first cross-attention variant, which used a shared linear transformation across radiomics features, performed poorly (AUC = 0.565), suggesting that collapsing individual feature identities limits effective interaction. The refined cross-attention version with feature-index embeddings improved performance to 0.702 and provided a more stable sensitivity–specificity relationship.
+
+Gated attention was the best-performing approach. With the full 71-feature set, it achieved an AUC of 0.812—the highest among all models~\cite{qiu2024gated}—and maintained balanced accuracy and specificity. Even with only 5 radiomics features, it achieved an AUC of 0.791, indicating strong robustness and effective modality-weighting. By adaptively modulating radiomics and deep CT representations, gated attention mitigates heterogeneous feature scales and suppresses modality-specific noise, enhancing generalisation.
+
+The SE-like recalibration module achieved an AUC of 0.673~\cite{hu2018squeeze}, outperforming DL-only baselines but remaining below concatenation and gated-attention fusion. Some fusion variants provided only small gains or slight declines, likely due to suboptimal modality alignment or overfitting, indicating that simple feature merging is insufficient without an interaction mechanism.
+
+Fusion models also enable enhanced interpretability. Attention, gating, and recalibration modules yield explicit feature-weighting patterns that map to radiomics descriptors or spatial CT features. These provide clinically meaningful insight into which quantitative attributes or tumour regions influence predictions—capabilities not available in image-only models. Thus, radiomics–DL fusion offers a transparent cross-modal reasoning framework that supports clinical validation.
+
+Overall, multimodal fusion markedly improves renal tumour texture classification. Radiomics-only models remain strong and interpretable, but DL alone is inadequate for this task. Fusion approaches consistently surpassed unimodal baselines, with gated attention offering the most robust and generalisable performance. These findings directly answer RQ1 and substantially address RQ2 by demonstrating the benefit of integrating radiomics with DL representations and identifying which fusion mechanisms are most effective. The benchmarks established here form the foundation for subsequent experiments involving vision–language fusion and incorporation of clinical metadata, supporting future development of richer multimodal renal tumour classification systems.
